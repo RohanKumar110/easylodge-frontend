@@ -29,6 +29,7 @@ function Header() {
           (service) =>
             service.show && (
               <Button
+                key={service.id}
                 className={`bg-transparent shadow-none cursor-pointer rounded-full font-normal hover:bg-white/10 flex items-center justify-between gap-2 px-6 h-11 ${service.active && "border border-white bg-white/10"}`}>
                 <Icon icon={service.icon} />
                 {service.title}
