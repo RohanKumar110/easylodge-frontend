@@ -8,3 +8,10 @@ export function cn(...inputs) {
 export function getAssetPath(name) {
   return `assets/${name}`;
 }
+
+export function formatCompactNumber(number) {
+  if (number >= 1000) {
+    return `${Math.floor(number / 1000)}k+`;
+  }
+  return `${number}+`;
+}
