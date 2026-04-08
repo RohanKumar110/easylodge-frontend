@@ -11,6 +11,8 @@ import {
   CircleCheck,
   Zap,
   Info,
+  Eye,
+  EyeOff,
 } from "lucide-react";
 
 export default {
@@ -84,4 +86,6 @@ export default {
   circleCheck: CircleCheck,
   zap: Zap,
   info: Info,
+  eye: Eye,
+  eyeOff: EyeOff,
 };

@@ -5,12 +5,15 @@ import {
   FieldGroup,
   FieldLabel,
 } from "@/components/ui/field";
+import Icon from "@/components/ui/icon";
 
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 function SignUp() {
+  const [showPassword, setShowPassword] = useState(false);
+
   const form = useForm({
     defaultValues: {
       name: "",
@@ -18,6 +21,11 @@ function SignUp() {
       password: "",
     },
   });
+
+  function handleToggleShowPassword(e) {
+    e.preventDefault();
+    setShowPassword((prevState) => !prevState);
+  }
 
   function onSubmit(data) {
     console.log("data");
@@ -81,14 +89,27 @@ function SignUp() {
                 <FieldLabel htmlFor="signup-password" className="gap-1">
                   Password<span className="text-destructive">*</span>
                 </FieldLabel>
-                <Input
-                  {...field}
-                  id="signup-password"
-                  type="password"
-                  className="h-10 rounded"
-                  aria-invalid={fieldState.invalid}
-                  placeholder="Enter your password"
-                />
+                <div className="relative">
+                  <Input
+                    {...field}
+                    id="signup-password"
+                    type={showPassword ? "text" : "password"}
+                    className="h-10 rounded flex-1"
+                    aria-invalid={fieldState.invalid}
+                    placeholder="Enter your password"
+                  />
+                  <Button
+                    variant="ghost"
+                    type="button"
+                    onClick={(e) => handleToggleShowPassword(e)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 bg-transparent hover:bg-transparent shadow-none">
+                    <Icon
+                      size={18}
+                      icon={showPassword ? "eyeOff" : "eye"}
+                      className="text-muted-foreground"
+                    />
+                  </Button>
+                </div>
                 {fieldState.invalid && (
                   <FieldError errors={[fieldState.error]} />
                 )}
