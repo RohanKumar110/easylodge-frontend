@@ -3,7 +3,7 @@ import Home from "./home";
 import Footer from "@/components/layouts/footer.layout";
 import Header from "@/components/layouts/header.layout";
 import HotelDetails from "./hotel-details";
-import { SignUpPage } from "./auth/index";
+import { SignInPage, SignUpPage } from "./auth/index";
 
 function App() {
   return (
@@ -11,7 +11,8 @@ function App() {
       <Header />
       {/* <Home /> */}
       {/* <HotelDetails /> */}
-      <SignUpPage />
+      {/* <SignUpPage /> */}
+      <SignInPage />
       <Footer />
     </>
   );

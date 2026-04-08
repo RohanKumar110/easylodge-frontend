@@ -35,7 +35,7 @@ function SignUp() {
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-name">
+                <FieldLabel htmlFor="signup-name" className="gap-1">
                   Name<span className="text-destructive">*</span>
                 </FieldLabel>
                 <Input
@@ -56,7 +56,7 @@ function SignUp() {
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-email">
+                <FieldLabel htmlFor="signup-email" className="gap-1">
                   Email<span className="text-destructive">*</span>
                 </FieldLabel>
                 <Input
@@ -78,7 +78,7 @@ function SignUp() {
             control={form.control}
             render={({ field, fieldState }) => (
               <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-password">
+                <FieldLabel htmlFor="signup-password" className="gap-1">
                   Password<span className="text-destructive">*</span>
                 </FieldLabel>
                 <Input
