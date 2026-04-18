@@ -1,15 +1,17 @@
 import { Button } from "@/components/ui/button";
 import {
-  Field,
-  FieldError,
-  FieldGroup,
-  FieldLabel,
-} from "@/components/ui/field";
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 import Icon from "@/components/ui/icon";
 
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false);
@@ -34,96 +36,95 @@ function SignUp() {
 
   return (
     <>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="mt-8 w-full space-y-5">
-        <FieldGroup>
-          <Controller
-            name="name"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-name" className="gap-1">
-                  Name<span className="text-destructive">*</span>
-                </FieldLabel>
-                <Input
-                  {...field}
-                  id="signup-name"
-                  className="h-10 rounded"
-                  aria-invalid={fieldState.invalid}
-                  placeholder="Enter your name"
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
-          <Controller
-            name="email"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-email" className="gap-1">
-                  Email<span className="text-destructive">*</span>
-                </FieldLabel>
-                <Input
-                  {...field}
-                  id="signup-email"
-                  type="email"
-                  className="h-10 rounded"
-                  aria-invalid={fieldState.invalid}
-                  placeholder="Enter your email"
-                />
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
-          <Controller
-            name="password"
-            control={form.control}
-            render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel htmlFor="signup-password" className="gap-1">
-                  Password<span className="text-destructive">*</span>
-                </FieldLabel>
-                <div className="relative">
-                  <Input
-                    {...field}
-                    id="signup-password"
-                    type={showPassword ? "text" : "password"}
-                    className="h-10 rounded flex-1"
-                    aria-invalid={fieldState.invalid}
-                    placeholder="Enter your password"
-                  />
-                  <Button
-                    variant="ghost"
-                    type="button"
-                    onClick={(e) => handleToggleShowPassword(e)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 bg-transparent hover:bg-transparent shadow-none">
-                    <Icon
-                      size={18}
-                      icon={showPassword ? "eyeOff" : "eye"}
-                      className="text-muted-foreground"
+      <Form {...form}>
+        <form
+          onSubmit={form.handleSubmit(onSubmit)}
+          className="mt-8 w-full space-y-5">
+          <div className="space-y-5">
+            <FormField
+              name="name"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="signup-name" className="gap-1">
+                    Name<span className="text-destructive">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      id="signup-name"
+                      className="h-10 rounded"
+                      placeholder="Enter your name"
                     />
-                  </Button>
-                </div>
-                {fieldState.invalid && (
-                  <FieldError errors={[fieldState.error]} />
-                )}
-              </Field>
-            )}
-          />
-        </FieldGroup>
-        <Button
-          type="submit"
-          className="w-full h-10 bg-brand cursor-pointer"
-          aria-label="Create a new Account">
-          Create New Account
-        </Button>
-      </form>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="email"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="signup-email" className="gap-1">
+                    Email<span className="text-destructive">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      {...field}
+                      id="signup-email"
+                      type="email"
+                      className="h-10 rounded"
+                      placeholder="Enter your email"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              name="password"
+              control={form.control}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel htmlFor="signup-password" className="gap-1">
+                    Password<span className="text-destructive">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        {...field}
+                        id="signup-password"
+                        type={showPassword ? "text" : "password"}
+                        className="h-10 rounded flex-1"
+                        placeholder="Enter your password"
+                      />
+                      <Button
+                        variant="ghost"
+                        type="button"
+                        onClick={(e) => handleToggleShowPassword(e)}
+                        className="absolute right-2 top-1/2 -translate-y-1/2 h-8 w-8 bg-transparent hover:bg-transparent shadow-none">
+                        <Icon
+                          size={18}
+                          icon={showPassword ? "eyeOff" : "eye"}
+                          className="text-muted-foreground"
+                        />
+                      </Button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+          <Button
+            type="submit"
+            className="w-full h-10 bg-brand cursor-pointer"
+            aria-label="Create a new Account">
+            Create New Account
+          </Button>
+        </form>
+      </Form>
 
       <div className="flex items-center justify-center mt-3">
         <span className="text-sm">
