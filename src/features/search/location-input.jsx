@@ -34,7 +34,7 @@ function LocationInput({ form }) {
   return (
     <Popover open={isPopOverOpen} onOpenChange={setIsPopOverOpen}>
       <PopoverTrigger asChild>
-        <div className="flex gap-2 items-center px-4 py-2 rounded bg-background lg:min-w-90">
+        <div className="h-12 flex gap-2 items-center px-4 py-2 rounded bg-background lg:min-w-80">
           <Icon
             icon="bed"
             size="24"
