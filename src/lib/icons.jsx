@@ -13,6 +13,13 @@ import {
   Info,
   Eye,
   EyeOff,
+  X,
+  MapPin,
+  CalendarDays,
+  User2,
+  ChevronDown,
+  Minus,
+  Plus,
 } from "lucide-react";
 
 export default {
@@ -88,4 +95,11 @@ export default {
   info: Info,
   eye: Eye,
   eyeOff: EyeOff,
+  close: X,
+  location: MapPin,
+  calendar: CalendarDays,
+  user: User2,
+  dropdown: ChevronDown,
+  minus: Minus,
+  plus: Plus,
 };
