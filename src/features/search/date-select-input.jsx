@@ -18,7 +18,7 @@ function DateSelectInput({ form }) {
         render={({ field }) => (
           <>
             <PopoverTrigger asChild>
-              <FormItem className="h-12 px-4 py-2 rounded bg-background lg:min-w-80 flex-auto">
+              <FormItem className="h-12 px-4 py-2 rounded bg-background flex-auto">
                 <div
                   role="button"
                   className="flex flex-auto items-center w-full h-full cursor-pointer">
