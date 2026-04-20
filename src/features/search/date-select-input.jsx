@@ -18,8 +18,10 @@ function DateSelectInput({ form }) {
         render={({ field }) => (
           <>
             <PopoverTrigger asChild>
-              <FormItem className="h-12 px-4 py-2 rounded bg-background lg:min-w-80 lg:flex-auto">
-                <div role="button" className="flex items-center w-full h-full">
+              <FormItem className="h-12 px-4 py-2 rounded bg-background lg:min-w-80 flex-auto">
+                <div
+                  role="button"
+                  className="flex flex-auto items-center w-full h-full cursor-pointer">
                   <Icon
                     icon="calendar"
                     size="24"
@@ -45,7 +47,7 @@ function DateSelectInput({ form }) {
             <PopoverContent
               sideOffset={4}
               align="start"
-              className="w-auto"
+              className="bg-background w-[calc(100vw-2rem)] lg:w-auto"
               onOpenAutoFocus={(e) => e.preventDefault()}>
               <Calendar
                 required

@@ -5,11 +5,17 @@ import LocationInput from "./location-input";
 import DateSelectInput from "./date-select-input";
 import OccupancyInput from "./occupancy-input";
 import { Button } from "@/components/ui/button";
+import dayjs from "dayjs";
 
 function Search() {
   const form = useForm({
     defaultValues: {
       city: "",
+      bookingDates: {
+        from: dayjs().toDate(),
+        to: dayjs().add(1, "day").toDate(),
+      },
+      roomsCount: 1,
     },
   });
 
@@ -22,11 +28,11 @@ function Search() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-1 p-1 bg-yellow-500 lg:flex-row lg:items-center rounded">
+          className="flex flex-col gap-3 lg:gap-1 p-2 lg:p-1 bg-yellow-500 lg:flex-row lg:items-center rounded">
           <LocationInput form={form} />
           <DateSelectInput form={form} />
           <OccupancyInput form={form} />
-          <Button type="submit" className="text-lg h-full">
+          <Button type="submit" className="h-12 text-lg cursor-pointer">
             Search
           </Button>
         </form>

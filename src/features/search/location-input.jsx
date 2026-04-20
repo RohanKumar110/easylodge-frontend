@@ -34,7 +34,7 @@ function LocationInput({ form }) {
   return (
     <Popover open={isPopOverOpen} onOpenChange={setIsPopOverOpen}>
       <PopoverTrigger asChild>
-        <div className="h-12 flex gap-2 items-center px-4 py-2 rounded bg-background lg:min-w-80">
+        <div className="h-12 flex flex-auto gap-2 items-center px-4 py-2 rounded bg-background lg:min-w-90">
           <Icon
             icon="bed"
             size="24"
@@ -75,7 +75,7 @@ function LocationInput({ form }) {
       <PopoverContent
         sideOffset="1"
         align="start"
-        className="bg-background w-90"
+        className="bg-background w-[calc(100vw-2rem)] max-w-90"
         onOpenAutoFocus={(e) => e.preventDefault()}>
         <div className="p-3">
           <p className="text-sm font-semibold ">Popular destinations</p>
