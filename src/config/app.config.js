@@ -136,3 +136,19 @@ export const DESTINATIONS = [
   { city: "Chennai", country: "India" },
   { city: "Pune", country: "India" },
 ];
+
+export const STAR_FILTERS = [
+  { id: 1, label: "5 Stars", value: 5 },
+  { id: 2, label: "4 Stars", value: 4 },
+  { id: 3, label: "3 Stars", value: 3 },
+  { id: 4, label: "2 Stars", value: 2 },
+  { id: 5, label: "1 Star", value: 1 },
+];
+
+export const PRICE_FILTERS = [
+  { id: 1, label: "$0 - $500", value: "0-500" },
+  { id: 2, label: "$500 - $1000", value: "500-1000" },
+  { id: 3, label: "$1000 - $1500", value: "1000-1500" },
+  { id: 4, label: "$1500 - $2000", value: "1500-2000" },
+  { id: 5, label: "$2000 - $2500", value: "2000-2500" },
+];
