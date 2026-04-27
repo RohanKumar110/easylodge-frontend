@@ -152,3 +152,13 @@ export const PRICE_FILTERS = [
   { id: 4, label: "$1500 - $2000", value: "1500-2000" },
   { id: 5, label: "$2000 - $2500", value: "2000-2500" },
 ];
+
+export const SEARCH_FILTERS = [
+  { id: 1, label: "Price (lowest first)", value: "price", order: "asc" },
+  { id: 2, label: "Price (highest first)", value: "price", order: "desc" },
+];
+
+export const SEARCH_FILTER_LABEL_KEY = {
+  "price-asc": "Price (lowest first)",
+  "price-desc": "Price (highest first)",
+};

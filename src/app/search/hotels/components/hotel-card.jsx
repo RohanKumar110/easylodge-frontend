@@ -18,6 +18,7 @@ const hotelInfo = {
 };
 
 function HotelCard({ name, images = [], city, amenities = [], price = 0 }) {
+  
   images = [...images, ...images];
 
   return (

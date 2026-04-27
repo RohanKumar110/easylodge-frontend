@@ -1,9 +1,16 @@
 import React from "react";
 import HotelCard from "./components/hotel-card";
+import HotelCardSkeleton from "./components/hotel-card-skeleton";
 
 function SearchedHotels({ isLoading, hotels, error }) {
+
   if (isLoading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="space-y-4">
+        <HotelCardSkeleton />
+        <HotelCardSkeleton />
+      </div>
+    );
   }
 
   return (
