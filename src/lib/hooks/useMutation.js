@@ -43,18 +43,11 @@ function useMutation(url, method) {
     } finally {
       setMutateState((prev) => ({ ...prev, isLoading: false }));
     }
-
-    return {
-      ...mutateState,
-      mutate,
-    };
   }
-
-  useEffect(() => {
-    fetchData();
-  }, [url]);
-
-  return queryState;
+  return {
+    ...mutateState,
+    mutate,
+  };
 }
 
 export default useMutation;

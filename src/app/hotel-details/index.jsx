@@ -7,6 +7,7 @@ import HotelCheckoutCard from "./hotel-checkout-card";
 import { HOTEL_DATA, HOTEL_INFO } from "./hotel-details-dummy-data";
 
 function HotelDetails() {
+  
   const hotelData = HOTEL_DATA;
   const hotelInfo = HOTEL_INFO;
 

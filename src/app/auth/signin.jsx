@@ -7,38 +7,27 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-
 import Icon from "@/components/ui/icon";
-
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
+import { Link } from "react-router";
+import useSignInForm from "./hooks/use-sign-in-form";
 
 function SignIn() {
-  const [showPassword, setShowPassword] = useState(false);
+  const { form, isLoading, handleSignInFormSubmit } = useSignInForm();
 
-  const form = useForm({
-    defaultValues: {
-      email: "",
-      password: "",
-    },
-  });
+  const [showPassword, setShowPassword] = useState(false);
 
   function handleToggleShowPassword(e) {
     e.preventDefault();
     setShowPassword((prevState) => !prevState);
   }
 
-  function onSubmit(data) {
-    console.log("data");
-    console.log(data);
-  }
-
   return (
     <>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(handleSignInFormSubmit)}
           className="mt-8 w-full space-y-5">
           <div className="space-y-5">
             <FormField
@@ -99,9 +88,10 @@ function SignIn() {
           </div>
           <Button
             type="submit"
+            disabled={isLoading || form.formState.isSubmitting}
             className="w-full h-10 bg-brand cursor-pointer"
             aria-label="Login to your account">
-            Login
+            {isLoading ? "Signing In..." : "Sign In"}
           </Button>
         </form>
       </Form>
@@ -109,9 +99,9 @@ function SignIn() {
       <div className="flex items-center justify-center mt-3">
         <span className="text-sm">
           Don't have an account?{" "}
-          <a href="" className="text-primary hover:underline">
+          <Link to="/signup" className="text-primary hover:underline">
             Sign Up
-          </a>
+          </Link>
         </span>
       </div>
     </>

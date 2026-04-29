@@ -2,25 +2,34 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { SERVICE_LIST } from "@/config/app.config";
 import Icon from "../ui/icon";
+import { Link } from "react-router";
 
 function Header() {
   return (
     <header className="bg-brand py-2 ">
       <div className="container flex justify-between items-center">
         <div id="logo-wrapper">
-          <a
+          <Link
             className="text-white font-bold text-2xl"
-            href="#"
+            to="/"
             aria-label="Go to Easylodge.in">
             Easylodge.in
-          </a>
+          </Link>
         </div>
         <div id="auth" className="flex gap-2 justify-center items-center">
-          <Button className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90">
-            Register
+          <Button
+            className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
+            asChild>
+            <Link to="/signup" aria-label="Go to Sign Up Page">
+              Register
+            </Link>
           </Button>
-          <Button className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90">
-            Login
+          <Button
+            className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
+            asChild>
+            <Link to="/signin" aria-label="Go to Sign In Page">
+              Login
+            </Link>
           </Button>
         </div>
       </div>
@@ -29,10 +38,13 @@ function Header() {
           (service) =>
             service.show && (
               <Button
+                asChild
                 key={service.id}
                 className={`bg-transparent shadow-none cursor-pointer rounded-full font-normal hover:bg-white/10 flex items-center justify-between gap-2 px-6 h-11 ${service.active && "border border-white bg-white/10"}`}>
-                <Icon icon={service.icon} />
-                {service.title}
+                <Link to="/">
+                  <Icon icon={service.icon} />
+                  {service.title}
+                </Link>
               </Button>
             )
         )}
