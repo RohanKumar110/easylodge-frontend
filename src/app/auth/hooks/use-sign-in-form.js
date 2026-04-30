@@ -5,9 +5,12 @@ import { useNavigate } from "react-router";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "@/lib/validators/auth-form-validator";
+import useLocalStorage from "@/lib/hooks/useLocalStorage";
+import { AUTH_TOKEN_KEY } from "@/config/storage.config";
 
 function useSignInForm() {
   const navigate = useNavigate();
+  const { setStoredValue } = useLocalStorage(AUTH_TOKEN_KEY, null);
 
   const { mutate, data, isLoading, error } = useMutation(
     API_CONFIG.AUTH.SIGN_IN,
@@ -24,13 +27,14 @@ function useSignInForm() {
     },
   });
 
-  async function handleSignInFormSubmit(data) {
-    mutate(data, {
+  async function handleSignInFormSubmit(formData) {
+    mutate(formData, {
       onSuccess: (res) => {
         toast("Signed in successfully", {
           type: "success",
           position: "bottom-center",
         });
+        setStoredValue(res.data.data.accessToken);
         navigate("/", { replace: true });
       },
       onError: (err) => {},

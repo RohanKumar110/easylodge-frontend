@@ -3,21 +3,21 @@ import axiosInstance from "../axios-instance";
 
 function useQuery(url, options = {}) {
   const [queryState, setQueryState] = useState({
-    res: null,
+    data: null,
     isLoading: false,
     error: null,
   });
 
   async function fetchData() {
     setQueryState({
-      res: null,
+      data: null,
       isLoading: true,
       error: null,
     });
 
     try {
       const res = await axiosInstance.get(url, options);
-      setQueryState((prev) => ({ ...prev, res: res.data }));
+      setQueryState((prev) => ({ ...prev, data: res.data.data }));
     } catch (e) {
       setQueryState((prev) => ({ ...prev, error: e }));
     } finally {

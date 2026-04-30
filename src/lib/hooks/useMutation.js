@@ -22,7 +22,7 @@ function useMutation(url, method) {
         data: payload,
       });
 
-      setMutateState((prev) => ({ ...prev, data: res.data }));
+      setMutateState((prev) => ({ ...prev, data: res.data.data }));
 
       if (
         callback &&
@@ -38,7 +38,7 @@ function useMutation(url, method) {
         callback.onError &&
         typeof callback.onError === "function"
       ) {
-        callback.onError(err);
+        callback.onError(e);
       }
     } finally {
       setMutateState((prev) => ({ ...prev, isLoading: false }));

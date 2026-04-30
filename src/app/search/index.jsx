@@ -7,7 +7,7 @@ import API_CONFIG from "@/config/api.config";
 import useQuery from "@/lib/hooks/useQuery";
 
 function SearchPage() {
-  const { res, isLoading, error } = useQuery(API_CONFIG.HOTEL.BROWSE_HOTELS, {
+  const { data, isLoading, error } = useQuery(API_CONFIG.HOTEL.BROWSE_HOTELS, {
     params: {
       city: "Miami",
       startDate: "2025-07-20",
@@ -18,7 +18,7 @@ function SearchPage() {
     },
   });
 
-  const hotels = res?.data.content || [];
+  const hotels = data?.content || [];
 
   return (
     <div className="container flex gap-4 mt-6 mb-10">

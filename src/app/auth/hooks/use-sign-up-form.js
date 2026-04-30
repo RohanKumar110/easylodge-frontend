@@ -25,8 +25,8 @@ function useSignUpForm() {
     },
   });
 
-  async function handleSignUpFormSubmit(data) {
-    mutate(data, {
+  async function handleSignUpFormSubmit(formData) {
+    mutate(formData, {
       onSuccess: (res) => {
         toast("Account created successfully", {
           description: "Use your credentials to Sign In!",
