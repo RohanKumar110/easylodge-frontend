@@ -1,4 +1,4 @@
-const { createContext } = require("react");
+import { createContext } from "react";
 
 const AuthContext = createContext({
   authenticatedUser: null,
@@ -6,8 +6,5 @@ const AuthContext = createContext({
 });
 
 function AuthContextProvider({ children }) {
-
-  
-
   return <AuthContext>{children}</AuthContext>;
 }

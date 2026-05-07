@@ -17,7 +17,7 @@ function useQuery(url, options = {}) {
 
     try {
       const res = await axiosInstance.get(url, options);
-      setQueryState((prev) => ({ ...prev, data: res.data.data }));
+      setQueryState((prev) => ({ ...prev, data: res.data }));
     } catch (e) {
       setQueryState((prev) => ({ ...prev, error: e }));
     } finally {

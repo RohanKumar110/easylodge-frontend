@@ -31,12 +31,17 @@ function useSignInForm() {
       onSuccess: (res) => {
         toast("Signed in successfully", {
           type: "success",
-          position: "bottom-center",
         });
-        setLocalStorageItem(AUTH_TOKEN_KEY, res.data.data.accessToken);
+        setLocalStorageItem(AUTH_TOKEN_KEY, res.data.accessToken);
         navigate("/", { replace: true });
       },
-      onError: (err) => {},
+      onError: (err) => {
+        console.log(err);
+        toast("Error:", {
+          description: err.message,
+          type: "error",
+        });
+      },
     });
   }
 

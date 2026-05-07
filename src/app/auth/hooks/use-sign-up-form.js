@@ -31,7 +31,6 @@ function useSignUpForm() {
         toast("Account created successfully", {
           description: "Use your credentials to Sign In!",
           type: "success",
-          position: "bottom-center",
         });
         navigate("/signin", { replace: true });
       },

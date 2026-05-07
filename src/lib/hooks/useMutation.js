@@ -22,7 +22,7 @@ function useMutation(url, method) {
         data: payload,
       });
 
-      setMutateState((prev) => ({ ...prev, data: res.data.data }));
+      setMutateState((prev) => ({ ...prev, data: res.data }));
 
       if (
         callback &&

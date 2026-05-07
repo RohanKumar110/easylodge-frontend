@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Router />
-      <Toaster richColors />
+      <Toaster richColors position="bottom-center" />
     </>
   );
 }
