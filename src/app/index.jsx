@@ -1,12 +1,15 @@
 import React from "react";
 import Router from "./router";
 import { Toaster } from "@/components/ui/sonner";
+import AuthContextProvider from "@/lib/providers/auth-context-provider";
 
 function App() {
   return (
     <>
-      <Router />
-      <Toaster richColors position="bottom-center" />
+      <AuthContextProvider>
+        <Router />
+        <Toaster richColors position="bottom-center" />
+      </AuthContextProvider>
     </>
   );
 }
