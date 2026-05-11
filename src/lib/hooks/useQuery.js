@@ -9,19 +9,26 @@ function useQuery(url, options = {}) {
   });
 
   async function fetchData() {
-    setQueryState({
-      data: null,
+    setQueryState((prev) => ({
+      ...prev,
       isLoading: true,
       error: null,
-    });
+    }));
 
     try {
       const res = await axiosInstance.get(url, options);
-      setQueryState((prev) => ({ ...prev, data: res.data }));
+
+      setQueryState({
+        data: res.data,
+        isLoading: false,
+        error: null,
+      });
     } catch (e) {
-      setQueryState((prev) => ({ ...prev, error: e }));
-    } finally {
-      setQueryState((prev) => ({ ...prev, isLoading: false }));
+      setQueryState({
+        data: null,
+        isLoading: false,
+        error: e,
+      });
     }
   }
 
@@ -29,7 +36,7 @@ function useQuery(url, options = {}) {
     fetchData();
   }, [url]);
 
-  return { ...queryState };
+  return { refetchQuery: fetchData, ...queryState };
 }
 
 export default useQuery;

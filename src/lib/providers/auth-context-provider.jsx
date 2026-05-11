@@ -5,38 +5,49 @@ import API_CONFIG from "@/config/api.config";
 const AuthContext = createContext({
   isAuthenticated: false,
   authenticatedUser: null,
-  setAuthenticatedUser: () => {},
+  setAuth: () => {},
+  refetchCurrentUser: () => {},
 });
 
 function AuthContextProvider({ children }) {
-  const [authenticatedUser, setAuthenticatedUser] = useState({
-    authenticatedUser: null,
+  const [auth, setAuth] = useState({
     isAuthenticated: false,
+    authenticatedUser: null,
   });
 
-  const { data, isLoading, error } = useQuery(API_CONFIG.USER.PROFILE);
+  const { data, isLoading, refetchQuery, error } = useQuery(
+    API_CONFIG.USER.PROFILE
+  );
+
   useEffect(() => {
-    if (!isLoading && !error && data) {
-      setAuthenticatedUser({
+    if (isLoading) return;
+
+    if (!error && data) {
+      setAuth({
         authenticatedUser: data,
         isAuthenticated: true,
+      });
+    } else {
+      setAuth({
+        authenticatedUser: null,
+        isAuthenticated: false,
       });
     }
   }, [data, isLoading, error]);
 
   if (isLoading) {
-    <p>Loading...</p>;
+    return <p>Loading...</p>;
   }
 
   return (
     <AuthContext.Provider
-      value={{ ...authenticatedUser, setAuthenticatedUser }}>
+      value={{ refetchCurrentUser: refetchQuery, setAuth, ...auth }}>
       {children}
     </AuthContext.Provider>
   );
 }
 
-function useAuthConext() {
+function useAuthContext() {
   const context = useContext(AuthContext);
   if (!context) {
     throw new Error(
@@ -46,5 +57,5 @@ function useAuthConext() {
   return context;
 }
 
-export { useAuthConext };
+export { useAuthContext };
 export default AuthContextProvider;

@@ -3,8 +3,11 @@ import { Button } from "@/components/ui/button";
 import { SERVICE_LIST } from "@/config/app.config";
 import Icon from "../ui/icon";
 import { Link } from "react-router";
+import { useAuthContext } from "@/lib/providers/auth-context-provider";
 
 function Header() {
+  const { isAuthenticated, authenticatedUser } = useAuthContext();
+
   return (
     <header className="bg-brand py-2 ">
       <div className="container flex justify-between items-center">
@@ -17,20 +20,26 @@ function Header() {
           </Link>
         </div>
         <div id="auth" className="flex gap-2 justify-center items-center">
-          <Button
-            className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
-            asChild>
-            <Link to="/signup" aria-label="Go to Sign Up Page">
-              Register
-            </Link>
-          </Button>
-          <Button
-            className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
-            asChild>
-            <Link to="/signin" aria-label="Go to Sign In Page">
-              Login
-            </Link>
-          </Button>
+          {isAuthenticated ? (
+            <p>Hi, {authenticatedUser.name}</p>
+          ) : (
+            <>
+              <Button
+                className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
+                asChild>
+                <Link to="/signup" aria-label="Go to Sign Up Page">
+                  Register
+                </Link>
+              </Button>
+              <Button
+                className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
+                asChild>
+                <Link to="/signin" aria-label="Go to Sign In Page">
+                  Login
+                </Link>
+              </Button>
+            </>
+          )}
         </div>
       </div>
       <div className="container flex gap-1 overflow-x-auto scrollbar">
