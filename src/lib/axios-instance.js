@@ -5,6 +5,8 @@ import {
   removeLocalStorageItem,
   setLocalStorageItem,
 } from "./store.manager";
+import API_CONFIG from "@/config/api.config";
+import PATHS from "@/config/path.config";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_SERVER_BASE_URL,
@@ -17,9 +19,9 @@ async function logoutAndRedirect() {
   removeLocalStorageItem(AUTH_TOKEN_KEY);
 
   try {
-    await axiosInstance.post("/auth/logout", {}, { skipAuth: true });
+    await axiosInstance.post(API_CONFIG.AUTH.LOGOUT, {}, { skipAuth: true });
   } finally {
-    window.location.replace("/signin");
+    window.location.replace(PATHS.SIGN_IN);
   }
 }
 
@@ -46,21 +48,21 @@ axiosInstance.interceptors.response.use(
       return Promise.reject(error);
     }
 
-    // refresh token failed
-    if (originalRequest.url?.includes("/auth/refresh") || status === 403) {
+    if (
+      originalRequest.url?.includes(API_CONFIG.AUTH.REFRESH) ||
+      status === 403
+    ) {
       await logoutAndRedirect();
       return Promise.reject(error);
     }
 
-    // access token expired
     if (status === 401 && !originalRequest._retry) {
       originalRequest._retry = true;
 
       try {
-        // avoid multiple refresh calls
         if (!refreshPromise) {
           refreshPromise = axiosInstance
-            .post("/auth/refresh", {}, { skipAuth: true })
+            .post(API_CONFIG.AUTH.REFRESH, {}, { skipAuth: true })
             .finally(() => {
               refreshPromise = null;
             });

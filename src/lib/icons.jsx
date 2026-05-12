@@ -20,6 +20,8 @@ import {
   ChevronDown,
   Minus,
   Plus,
+  LogOut,
+  CalendarClock,
 } from "lucide-react";
 
 export default {
@@ -102,4 +104,6 @@ export default {
   dropdown: ChevronDown,
   minus: Minus,
   plus: Plus,
+  logout: LogOut,
+  bookingHistory: CalendarClock,
 };

@@ -2,6 +2,8 @@ const API_CONFIG = {
   AUTH: {
     SIGN_UP: "/auth/signup",
     SIGN_IN: "/auth/login",
+    REFRESH: "/auth/refresh",
+    LOGOUT: "/auth/logout",
   },
   USER: {
     PROFILE: "/users/profile",

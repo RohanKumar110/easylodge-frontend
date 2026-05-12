@@ -4,6 +4,7 @@ import { SERVICE_LIST } from "@/config/app.config";
 import Icon from "../ui/icon";
 import { Link } from "react-router";
 import { useAuthContext } from "@/lib/providers/auth-context-provider";
+import AccountMenu from "../account-menu";
 
 function Header() {
   const { isAuthenticated, authenticatedUser } = useAuthContext();
@@ -21,7 +22,7 @@ function Header() {
         </div>
         <div id="auth" className="flex gap-2 justify-center items-center">
           {isAuthenticated ? (
-            <p>Hi, {authenticatedUser.name}</p>
+            <AccountMenu user={authenticatedUser} />
           ) : (
             <>
               <Button
