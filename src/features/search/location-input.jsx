@@ -6,12 +6,7 @@ import {
 } from "@/components/ui/popover";
 import React, { useState } from "react";
 import { Input } from "@/components/ui/input";
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormMessage,
-} from "@/components/ui/form";
+import { FormControl, FormField, FormItem } from "@/components/ui/form";
 import { DESTINATIONS } from "@/config/app.config";
 import { Button } from "@/components/ui/button";
 
@@ -54,7 +49,6 @@ function LocationInput({ form }) {
                     autoComplete="off"
                   />
                 </FormControl>
-                <FormMessage />
               </FormItem>
             )}
           />

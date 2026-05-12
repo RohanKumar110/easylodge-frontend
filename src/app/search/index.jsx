@@ -3,20 +3,10 @@ import Filter from "./filter";
 import SortFilter from "./filter/components/sort-filter";
 import SearchedHotels from "./hotels";
 import PaginationFilter from "./filter/components/pagination-filter";
-import API_CONFIG from "@/config/api.config";
-import useQuery from "@/lib/hooks/useQuery";
+import useFetchHotels from "./hotels/hooks/use-fetch-hotels";
 
 function SearchPage() {
-  const { data, isLoading, error } = useQuery(API_CONFIG.HOTEL.BROWSE_HOTELS, {
-    params: {
-      city: "Miami",
-      startDate: "2025-07-20",
-      endDate: "2025-07-22",
-      roomsCount: 1,
-      pageNo: 0,
-      pageSize: 5,
-    },
-  });
+  const { data, city, isLoading, error } = useFetchHotels();
 
   const hotels = data?.content || [];
 
@@ -25,7 +15,9 @@ function SearchPage() {
       <Filter />
       <section className="flex-1 space-y-6">
         <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">Jaipur - 858 Properties Found</h1>
+          <h1 className="text-xl font-bold">
+            {city} - {data?.totalItems} Properties Found
+          </h1>
           <SortFilter />
         </div>
         <SearchedHotels isLoading={isLoading} hotels={hotels} error={error} />
@@ -36,3 +28,10 @@ function SearchPage() {
 }
 
 export default SearchPage;
+
+// city: "Miami",
+// startDate: "2025-07-20",
+// endDate: "2025-07-22",
+// roomsCount: 1,
+// pageNo: 0,
+// pageSize: 10,

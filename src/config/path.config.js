@@ -5,7 +5,7 @@ const PATHS = {
   SIGN_UP: "/signup",
 
   HOTEL_DETAIL: "/hotels/:id",
-  SEARCH_HOTEL: "/hotels/search",
+  SEARCH_HOTELS: "/hotels/search",
 
   PROFILE: "/me/profile",
 

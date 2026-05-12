@@ -17,7 +17,7 @@ function Router() {
         <Route path={PATHS.LANDING} element={<Home />} />
         <Route path={PATHS.SIGN_IN} element={<SignInPage />} />
         <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
-        <Route path={PATHS.SEARCH_HOTEL} element={<SearchPage />} />
+        <Route path={PATHS.SEARCH_HOTELS} element={<SearchPage />} />
         <Route path={PATHS.HOTEL_DETAIL} element={<HotelDetails />} />
       </Routes>
       <Footer />

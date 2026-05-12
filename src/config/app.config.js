@@ -162,3 +162,18 @@ export const SEARCH_FILTER_LABEL_KEY = {
   "price-asc": "Price (lowest first)",
   "price-desc": "Price (highest first)",
 };
+
+export const SEARCH_RESULT_PAGE_LIMIT = 10;
+
+export const SEARCH_PARAMS_KEYS = {
+  CHECKIN: "startDate",
+  CHECKOUT: "endDate",
+  ROOMS: "roomsCount",
+  CITY: "city",
+  SELECTED_ROOM: "selected_rcid",
+  SORTBY: "sort",
+  PAGE: "pageNo",
+  STAR_CATEGORY: "star-category",
+  PRICE_RANGE: "price-range",
+  NEXT_REDIRECT: "next",
+};

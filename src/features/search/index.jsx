@@ -1,33 +1,23 @@
 import React from "react";
-import { useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
 import LocationInput from "./location-input";
 import DateSelectInput from "./date-select-input";
 import OccupancyInput from "./occupancy-input";
 import { Button } from "@/components/ui/button";
-import dayjs from "dayjs";
+import useSearchForm from "./hooks/use-search-form";
+import { Form } from "@/components/ui/form";
 
 function Search() {
-  const form = useForm({
-    defaultValues: {
-      city: "",
-      bookingDates: {
-        from: dayjs().toDate(),
-        to: dayjs().add(1, "day").toDate(),
-      },
-      roomsCount: 1,
-    },
-  });
-
-  function onSubmit(data) {
-    console.log("Search data: ", data);
-  }
+  const { form, handleSignInFormSubmit, handleSignInFormError } =
+    useSearchForm();
 
   return (
     <section className="container">
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(onSubmit)}
+          onSubmit={form.handleSubmit(
+            handleSignInFormSubmit,
+            handleSignInFormError
+          )}
           className="flex flex-col gap-3 lg:gap-1 p-2 lg:p-1 bg-yellow-500 lg:flex-row lg:items-center rounded">
           <LocationInput form={form} />
           <DateSelectInput form={form} />
