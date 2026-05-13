@@ -170,10 +170,10 @@ export const SEARCH_PARAMS_KEYS = {
   CHECKOUT: "endDate",
   ROOMS: "roomsCount",
   CITY: "city",
-  SELECTED_ROOM: "selected_rcid",
+  SELECTED_ROOM: "selectedRcid",
   SORTBY: "sort",
   PAGE: "pageNo",
-  STAR_CATEGORY: "star-category",
-  PRICE_RANGE: "price-range",
+  STAR_CATEGORY: "starCategory",
+  PRICE_RANGE: "priceRange",
   NEXT_REDIRECT: "next",
 };

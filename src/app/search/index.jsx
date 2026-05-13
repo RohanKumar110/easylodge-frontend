@@ -3,7 +3,7 @@ import Filter from "./filter";
 import SortFilter from "./filter/components/sort-filter";
 import SearchedHotels from "./hotels";
 import PaginationFilter from "./filter/components/pagination-filter";
-import useFetchHotels from "./hotels/hooks/use-fetch-hotels";
+import useFetchHotels from "./hotels/hooks/useFetchHotels";
 
 function SearchPage() {
   const { data, city, isLoading, error } = useFetchHotels();

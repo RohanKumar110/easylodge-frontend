@@ -6,13 +6,14 @@ import { Form } from "@/components/ui/form";
 import useFilterForm from "./hooks/useFilterForm";
 
 function SearchFilter() {
-  const { form } = useFilterForm();
+  const { form, handleFiltersChange, clearAllFilters } = useFilterForm();
 
   return (
     <aside className="border border-border max-h-max rounded-md w-65">
       <div className="flex items-center justify-between p-2">
         <h3 className="text-base font-bold">Filter By: </h3>
         <Button
+          onClick={clearAllFilters}
           variant="link"
           size="sm"
           className="cursor-pointer h-aut0 p-0 text-xs underline-offset-1">
@@ -20,8 +21,8 @@ function SearchFilter() {
         </Button>
       </div>
 
-      <Form>
-        <form>
+      <Form {...form}>
+        <form onChange={handleFiltersChange}>
           <StarFilter form={form} />
           <PriceFilter form={form} />
         </form>
