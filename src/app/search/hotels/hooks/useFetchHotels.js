@@ -8,10 +8,10 @@ import API_CONFIG from "@/config/api.config";
 
 function useFetchHotels() {
   const [searchParams] = useSearchParams();
-  const city = searchParams.get(SEARCH_PARAMS_KEYS.CITY).trim();
+  const city = searchParams.get(SEARCH_PARAMS_KEYS.CITY);
   const { data, isLoading, error } = useQuery(API_CONFIG.HOTEL.BROWSE_HOTELS, {
     params: {
-      city: searchParams.get(SEARCH_PARAMS_KEYS.CITY).trim(),
+      city: searchParams.get(SEARCH_PARAMS_KEYS.CITY),
       startDate: searchParams.get(SEARCH_PARAMS_KEYS.CHECKIN),
       endDate: searchParams.get(SEARCH_PARAMS_KEYS.CHECKOUT),
       roomsCount: searchParams.get(SEARCH_PARAMS_KEYS.ROOMS),

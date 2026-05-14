@@ -7,7 +7,7 @@ import useSearchForm from "./hooks/use-search-form";
 import { Form } from "@/components/ui/form";
 
 function Search() {
-  const { form, handleSignInFormSubmit, handleSignInFormError } =
+  const { form, handleSearchFormSubmit, handleSearchFormError } =
     useSearchForm();
 
   return (
@@ -15,8 +15,8 @@ function Search() {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(
-            handleSignInFormSubmit,
-            handleSignInFormError
+            handleSearchFormSubmit,
+            handleSearchFormError
           )}
           className="flex flex-col gap-3 lg:gap-1 p-2 lg:p-1 bg-yellow-500 lg:flex-row lg:items-center rounded">
           <LocationInput form={form} />

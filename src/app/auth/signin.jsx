@@ -14,7 +14,7 @@ import { Link } from "react-router";
 import useSignInForm from "./hooks/use-sign-in-form";
 
 function SignIn() {
-  const { form, isLoading, handleSignInFormSubmit } = useSignInForm();
+  const { form, isLoading, handleSearchFormSubmit } = useSignInForm();
 
   const [showPassword, setShowPassword] = useState(false);
 
@@ -27,7 +27,7 @@ function SignIn() {
     <>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleSignInFormSubmit)}
+          onSubmit={form.handleSubmit(handleSearchFormSubmit)}
           className="mt-8 w-full space-y-5">
           <div className="space-y-5">
             <FormField

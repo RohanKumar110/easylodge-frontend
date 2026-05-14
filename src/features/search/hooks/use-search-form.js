@@ -2,26 +2,33 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validators/search-form-validator";
 import dayjs from "dayjs";
 import { toast } from "sonner";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import PATHS from "@/config/path.config";
 import { useForm } from "react-hook-form";
+import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 
 function useSearchForm() {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  const checkIn = searchParams.get(SEARCH_PARAMS_KEYS.CHECKIN);
+  const checkOut = searchParams.get(SEARCH_PARAMS_KEYS.CHECKOUT);
 
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
     defaultValues: {
-      city: "",
+      city: searchParams.get(SEARCH_PARAMS_KEYS.CITY) || "",
       bookingDates: {
-        from: dayjs().toDate(),
-        to: dayjs().add(1, "day").toDate(),
+        from: checkIn ? dayjs(checkIn).toDate() : dayjs().toDate(),
+        to: checkOut
+          ? dayjs(checkOut).toDate()
+          : dayjs().add(1, "day").toDate(),
       },
-      roomsCount: 1,
+      roomsCount: parseInt(searchParams.get(SEARCH_PARAMS_KEYS.ROOMS)) || 1,
     },
   });
 
-  function handleSignInFormSubmit(data) {
+  function handleSearchFormSubmit(data) {
     const formattedData = {
       city: data.city,
       roomsCount: data.roomsCount,
@@ -32,7 +39,7 @@ function useSearchForm() {
     navigate(`${PATHS.SEARCH_HOTELS}?${params.toString()}`);
   }
 
-  function handleSignInFormError(errors) {
+  function handleSearchFormError(errors) {
     const firstError = Object.values(errors)[0];
     toast("Error:", {
       description: firstError?.message || "Please fill all fields",
@@ -40,7 +47,7 @@ function useSearchForm() {
     });
   }
 
-  return { form, handleSignInFormSubmit, handleSignInFormError };
+  return { form, handleSearchFormSubmit, handleSearchFormError };
 }
 
 export default useSearchForm;

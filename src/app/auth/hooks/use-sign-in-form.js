@@ -28,7 +28,7 @@ function useSignInForm() {
     },
   });
 
-  async function handleSignInFormSubmit(formData) {
+  async function handleSearchFormSubmit(formData) {
     mutate(formData, {
       onSuccess: (res) => {
         toast("Signed in successfully", {
@@ -39,7 +39,6 @@ function useSignInForm() {
         navigate("/", { replace: true });
       },
       onError: (err) => {
-        console.log(err);
         toast("Error:", {
           description: err.message,
           type: "error",
@@ -48,7 +47,7 @@ function useSignInForm() {
     });
   }
 
-  return { form, data, isLoading, error, handleSignInFormSubmit };
+  return { form, data, isLoading, error, handleSearchFormSubmit };
 }
 
 export default useSignInForm;
