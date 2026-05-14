@@ -4,6 +4,7 @@ import SortFilter from "./filter/components/sort-filter";
 import SearchedHotels from "./hotels";
 import PaginationFilter from "./filter/components/pagination-filter";
 import useFetchHotels from "./hotels/hooks/useFetchHotels";
+import Search from "@/features/search";
 
 function SearchPage() {
   const { data, city, isLoading, error } = useFetchHotels();
@@ -11,19 +12,24 @@ function SearchPage() {
   const hotels = data?.content || [];
 
   return (
-    <div className="container flex gap-4 mt-6 mb-10">
-      <Filter />
-      <section className="flex-1 space-y-6">
-        <div className="flex items-center justify-between">
-          <h1 className="text-xl font-bold">
-            {city} - {data?.totalItems} Properties Found
-          </h1>
-          <SortFilter />
-        </div>
-        <SearchedHotels isLoading={isLoading} hotels={hotels} error={error} />
-        {hotels.length > 0 && <PaginationFilter />}
-      </section>
-    </div>
+    <>
+      <div className="bg-linear-to-b from-brand from-50% to-transparent to-50%">
+        <Search />
+      </div>
+      <div className="container flex gap-4 mt-6 mb-10">
+        <Filter />
+        <section className="flex-1 space-y-6">
+          <div className="flex items-center justify-between">
+            <h1 className="text-xl font-bold">
+              {city} - {data?.totalItems} Properties Found
+            </h1>
+            <SortFilter />
+          </div>
+          <SearchedHotels isLoading={isLoading} hotels={hotels} error={error} />
+          {hotels.length > 0 && <PaginationFilter />}
+        </section>
+      </div>
+    </>
   );
 }
 

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { searchFormSchema } from "@/lib/validators/search-form-validator";
 import dayjs from "dayjs";
@@ -14,33 +15,38 @@ function useSearchForm() {
   const checkIn = searchParams.get(SEARCH_PARAMS_KEYS.CHECKIN);
   const checkOut = searchParams.get(SEARCH_PARAMS_KEYS.CHECKOUT);
 
+  const defaultValues = {
+    city: searchParams.get(SEARCH_PARAMS_KEYS.CITY) || "",
+    bookingDates: {
+      from: checkIn ? dayjs(checkIn).toDate() : dayjs().toDate(),
+      to: checkOut ? dayjs(checkOut).toDate() : dayjs().add(1, "day").toDate(),
+    },
+    roomsCount: Number(searchParams.get(SEARCH_PARAMS_KEYS.ROOMS)) || 1,
+  };
+
   const form = useForm({
     resolver: zodResolver(searchFormSchema),
-    defaultValues: {
-      city: searchParams.get(SEARCH_PARAMS_KEYS.CITY) || "",
-      bookingDates: {
-        from: checkIn ? dayjs(checkIn).toDate() : dayjs().toDate(),
-        to: checkOut
-          ? dayjs(checkOut).toDate()
-          : dayjs().add(1, "day").toDate(),
-      },
-      roomsCount: parseInt(searchParams.get(SEARCH_PARAMS_KEYS.ROOMS)) || 1,
-    },
+    defaultValues,
   });
 
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, [searchParams]);
+
   function handleSearchFormSubmit(data) {
-    const formattedData = {
+    const params = new URLSearchParams({
       city: data.city,
       roomsCount: data.roomsCount,
       startDate: dayjs(data.bookingDates.from).format("YYYY-MM-DD"),
       endDate: dayjs(data.bookingDates.to).format("YYYY-MM-DD"),
-    };
-    const params = new URLSearchParams(formattedData);
+    });
+
     navigate(`${PATHS.SEARCH_HOTELS}?${params.toString()}`);
   }
 
   function handleSearchFormError(errors) {
     const firstError = Object.values(errors)[0];
+
     toast("Error:", {
       description: firstError?.message || "Please fill all fields",
       type: "error",
