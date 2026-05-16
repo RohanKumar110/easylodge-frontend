@@ -1,5 +1,7 @@
 import Icon from "@/components/ui/icon";
 import React, { useState } from "react";
+import useHotelNavigation from "../hooks/useHotelNavigation";
+import { Link } from "react-router";
 
 const hotelInfo = {
   description:
@@ -17,76 +19,77 @@ const hotelInfo = {
   },
 };
 
-function HotelCard({ name, images = [], city, amenities = [], price = 0 }) {
-  
-  images = [...images, ...images];
+function HotelCard({ id, name, images = [], city, amenities = [], price = 0 }) {
+  const navigationUrl = useHotelNavigation(id);
 
   return (
-    <article className="flex w-full transition-colors border rounded-lg hover:border-primary">
-      <div className="flex flex-1 gap-4 p-4">
-        <HotelImages images={images} />
-        <div className="space-y-3">
-          <div className="space-y-0.5">
-            <h2 className="inline text-xl font-bold">
-              {name} &nbsp;
-              {new Array(3).fill(0).map((_, index) => (
-                <Icon
-                  key={index}
-                  icon="star"
-                  size="12"
-                  className="inline mb-2 text-yellow-500"
-                />
-              ))}
-            </h2>
-            <p className="text-sm font-semibold text-primary">{city}</p>
+    <Link to={navigationUrl}>
+      <article className="flex w-full transition-colors border rounded-lg hover:border-primary">
+        <div className="flex flex-1 gap-4 p-4">
+          <HotelImages images={images} />
+          <div className="space-y-3">
+            <div className="space-y-0.5">
+              <h2 className="inline text-xl font-bold">
+                {name} &nbsp;
+                {new Array(3).fill(0).map((_, index) => (
+                  <Icon
+                    key={index}
+                    icon="star"
+                    size="12"
+                    className="inline mb-2 text-yellow-500"
+                  />
+                ))}
+              </h2>
+              <p className="text-sm font-semibold text-primary">{city}</p>
+            </div>
+            <div className="flex items-center gap-0.5 text-muted-foreground">
+              <p className="text-sm font-semibold">{hotelInfo.details.type}</p>|
+              <p className="text-sm">{`${hotelInfo.details.bedrooms} Bedroom`}</p>
+              |
+              <p className="text-sm">{`Sleep ${hotelInfo.details.guests} Guests`}</p>
+            </div>
+            <div>
+              <ul className="space-y-1">
+                {amenities.slice(0, 2).map((policy, index) => (
+                  <li
+                    key={index}
+                    className="flex items-center gap-1 text-sm text-green-700">
+                    <Icon icon="check" size="16" className="" />
+                    {policy}
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="flex">
+              <p className="text-sm line-clamp-1">{hotelInfo.description}</p>
+              <span className="flex items-center text-xs font-medium shrink-0 text-primary">
+                View More
+              </span>
+            </div>
           </div>
-          <div className="flex items-center gap-0.5 text-muted-foreground">
-            <p className="text-sm font-semibold">{hotelInfo.details.type}</p>|
-            <p className="text-sm">{`${hotelInfo.details.bedrooms} Bedroom`}</p>
-            |
-            <p className="text-sm">{`Sleep ${hotelInfo.details.guests} Guests`}</p>
-          </div>
+        </div>
+        <div className="flex flex-col items-end w-48 p-4 border-l shrink-0">
           <div>
-            <ul className="space-y-1">
-              {amenities.slice(0, 2).map((policy, index) => (
-                <li
-                  key={index}
-                  className="flex items-center gap-1 text-sm text-green-700">
-                  <Icon icon="check" size="16" className="" />
-                  {policy}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="flex">
-            <p className="text-sm line-clamp-1">{hotelInfo.description}</p>
-            <span className="flex items-center text-xs font-medium shrink-0 text-primary">
-              View More
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex flex-col items-end w-48 p-4 border-l shrink-0">
-        <div>
-          <div className="flex gap-1.5">
-            <p className="text-base font-bold text-brand">
-              {hotelInfo.rating.text}
+            <div className="flex gap-1.5">
+              <p className="text-base font-bold text-brand">
+                {hotelInfo.rating.text}
+              </p>
+              <span className="inline-block px-1 py-0.5 text-sm font-bold text-white rounded bg-brand">
+                {hotelInfo.rating.score}
+              </span>
+            </div>
+            <p className="text-sm text-muted-foreground text-end">
+              &#40;{`${hotelInfo.rating.reviews} Ratings`}&#41;
             </p>
-            <span className="inline-block px-1 py-0.5 text-sm font-bold text-white rounded bg-brand">
-              {hotelInfo.rating.score}
-            </span>
           </div>
-          <p className="text-sm text-muted-foreground text-end">
-            &#40;{`${hotelInfo.rating.reviews} Ratings`}&#41;
-          </p>
+          <div className="flex flex-col items-end justify-center flex-1">
+            <p className="text-2xl font-bold">{`$${price.toLocaleString()}`}</p>
+            <p className="text-sm text-muted-foreground">{`+ $0 taxes & fees`}</p>
+            <p className="text-sm text-muted-foreground">Per Night</p>
+          </div>
         </div>
-        <div className="flex flex-col items-end justify-center flex-1">
-          <p className="text-2xl font-bold">{`$${price.toLocaleString()}`}</p>
-          <p className="text-sm text-muted-foreground">{`+ $0 taxes & fees`}</p>
-          <p className="text-sm text-muted-foreground">Per Night</p>
-        </div>
-      </div>
-    </article>
+      </article>
+    </Link>
   );
 }
 

@@ -35,7 +35,12 @@ function generatePaginationLinks(
       );
     }
     if (2 < currentPage && currentPage < totalPages - 1) {
-      pages.push(<PaginationEllipsis className={className} key={"ellipsis"} />);
+      pages.push(
+        <PaginationEllipsis
+          className={className}
+          key={`ellipsis${Math.random()}`}
+        />
+      );
       pages.push(
         <PaginationButton
           className={className}
@@ -46,7 +51,12 @@ function generatePaginationLinks(
         </PaginationButton>
       );
     }
-    pages.push(<PaginationEllipsis className={className} key={"ellipsis"} />);
+    pages.push(
+      <PaginationEllipsis
+        className={className}
+        key={`ellipsis${Math.random()}`}
+      />
+    );
     for (let i = totalPages - 1; i <= totalPages; i++) {
       pages.push(
         <PaginationButton

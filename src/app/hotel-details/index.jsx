@@ -4,16 +4,31 @@ import HotelMetaDetails from "./hotel-meta-details";
 import HotelRoomPicker from "./hotel-room-picker";
 import HotelPolicy from "./hotel-policy";
 import HotelCheckoutCard from "./hotel-checkout-card";
-import { HOTEL_DATA, HOTEL_INFO } from "./hotel-details-dummy-data";
+import { HOTEL_INFO } from "./hotel-details-dummy-data";
+import useFetchHotelDetails from "./hooks/useFetchHotelDetails";
 
 function HotelDetails() {
-  
-  const hotelData = HOTEL_DATA;
+  const { data, isLoading, error } = useFetchHotelDetails();
+
+  if (isLoading || !data) {
+    return <p>Loading...</p>;
+  }
+
+  if (error) {
+    return <p>Something went wrong</p>;
+  }
   const hotelInfo = HOTEL_INFO;
+  const hotelData = {
+    ...data,
+    rooms: data.rooms.map((room, index) => ({
+      ...room,
+      isSelected: index === 0,
+    })),
+  };
 
   return (
     <div className="container mt-6 mb-12">
-      <PropertyViewCarousel images={HOTEL_DATA.hotel.photos} />
+      <PropertyViewCarousel images={hotelData.hotel.images} />
 
       <div className="mt-6 flex flex-col gap-6 lg:flex-row">
         <aside className="order-1 w-full rounded-xl border border-border p-4 shadow-md lg:order-2 lg:sticky lg:top-6 lg:h-min lg:w-85 lg:shrink-0">

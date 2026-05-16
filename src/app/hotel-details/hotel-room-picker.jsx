@@ -58,8 +58,8 @@ function Room({ room }) {
         </div>
         <div className="w-45 h-30">
           <img
-            src={room.photos[0]}
-            alt={room.photos[0]}
+            src={room.images[0]}
+            alt={room.images[0]}
             className="object-cover size-full rounded-lg"
           />
         </div>

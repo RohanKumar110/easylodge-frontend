@@ -4,7 +4,7 @@ const PATHS = {
   SIGN_IN: "/signin",
   SIGN_UP: "/signup",
 
-  HOTEL_DETAIL: "/hotels/:id",
+  HOTEL_DETAIL: "/hotels/:hotelId",
   SEARCH_HOTELS: "/hotels/search",
 
   PROFILE: "/me/profile",
