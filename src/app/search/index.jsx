@@ -2,9 +2,9 @@ import React from "react";
 import Filter from "./filter";
 import SortFilter from "./filter/components/sort-filter";
 import SearchedHotels from "./hotels";
-import PaginationFilter from "./filter/components/pagination-filter";
 import useFetchHotels from "./hotels/hooks/useFetchHotels";
 import Search from "@/features/search";
+import SearchPagination from "./filter/components/search-pagination";
 
 function SearchPage() {
   const { data, city, isLoading, error } = useFetchHotels();
@@ -26,7 +26,12 @@ function SearchPage() {
             <SortFilter />
           </div>
           <SearchedHotels isLoading={isLoading} hotels={hotels} error={error} />
-          {hotels.length > 0 && <PaginationFilter />}
+          {hotels.length > 0 && (
+            <SearchPagination
+              totalItems={data?.totalItems}
+              limit={data?.pageSize}
+            />
+          )}
         </section>
       </div>
     </>

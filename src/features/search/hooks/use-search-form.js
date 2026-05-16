@@ -6,7 +6,10 @@ import { toast } from "sonner";
 import { useNavigate, useSearchParams } from "react-router";
 import PATHS from "@/config/path.config";
 import { useForm } from "react-hook-form";
-import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
+import {
+  SEARCH_PARAMS_KEYS,
+  SEARCH_RESULT_PAGE_LIMIT,
+} from "@/config/app.config";
 
 function useSearchForm() {
   const navigate = useNavigate();
@@ -39,6 +42,8 @@ function useSearchForm() {
       roomsCount: data.roomsCount,
       startDate: dayjs(data.bookingDates.from).format("YYYY-MM-DD"),
       endDate: dayjs(data.bookingDates.to).format("YYYY-MM-DD"),
+      pageNo: Number(searchParams.get(SEARCH_PARAMS_KEYS.PAGE)) || 0,
+      pageSize: SEARCH_RESULT_PAGE_LIMIT,
     });
 
     navigate(`${PATHS.SEARCH_HOTELS}?${params.toString()}`);

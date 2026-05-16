@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import axiosInstance from "../axios-instance";
 
 function useQuery(url, options = {}) {
+  const optionsKey = JSON.stringify(options);
+
   const [queryState, setQueryState] = useState({
     data: null,
     isLoading: false,
@@ -34,7 +36,7 @@ function useQuery(url, options = {}) {
 
   useEffect(() => {
     fetchData();
-  }, [url]);
+  }, [url, optionsKey]);
 
   return { refetchQuery: fetchData, ...queryState };
 }

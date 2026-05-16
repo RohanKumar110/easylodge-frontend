@@ -16,7 +16,7 @@ function SearchFilter() {
           onClick={clearAllFilters}
           variant="link"
           size="sm"
-          className="cursor-pointer h-aut0 p-0 text-xs underline-offset-1">
+          className="cursor-pointer h-auto p-0 text-xs underline-offset-1">
           Clear All
         </Button>
       </div>
