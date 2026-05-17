@@ -1,24 +1,48 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
-import React from "react";
+import React, { useEffect } from "react";
+import { useSearchParams } from "react-router";
+import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 
 function HotelRoomPicker({ rooms }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const selectedRoomId = searchParams.get(SEARCH_PARAMS_KEYS.SELECTED_ROOM);
+
+  useEffect(() => {
+    if (!rooms.find((room) => room.id === selectedRoomId)) {
+      searchParams.set(SEARCH_PARAMS_KEYS.SELECTED_ROOM, rooms[0].id);
+      setSearchParams(searchParams, { replace: true });
+    }
+  }, []);
+
   return (
     <section className="space-y-4">
       <h2 className="text-xl font-bold">Choose your room</h2>
       <div className="space-y-4">
         {rooms.map((room) => (
-          <Room key={room.id} room={room} />
+          <Room
+            key={room.id}
+            room={room}
+            isSelected={selectedRoomId === room.id}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function Room({ room }) {
+function Room({ room, isSelected }) {
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  function handleRoomSelectClick() {
+    searchParams.set(SEARCH_PARAMS_KEYS.SELECTED_ROOM, room.id);
+    setSearchParams(searchParams, { replace: true });
+  }
+
   return (
     <article>
-      {room.isSelected && (
+      {isSelected && (
         <div className="flex items-center gap-1 px-5 py-1 rounded-t-lg bg-brand">
           <Icon
             icon="star"
@@ -35,7 +59,7 @@ function Room({ room }) {
         <div className="flex-1 space-y-4">
           <div className="flex gap-1 items-center">
             <h3 className="text-lg font-semibold">{room.type}</h3>
-            {room.isSelected && (
+            {isSelected && (
               <Icon
                 icon="circleCheck"
                 size="24"
@@ -71,16 +95,17 @@ function Room({ room }) {
           <span className="text-sm text-muted-foreground line-through">{`$${(room.price * 1.24).toLocaleString()}`}</span>
         </div>
         <Button
-          disabled={room.isSelected}
+          disabled={isSelected}
+          onClick={handleRoomSelectClick}
           variant="outline"
           size="lg"
           className={`cursor-pointer h-12 font-semibold gap-1 w-45 disabled:opacity-70 uppercase
-              ${!room.isSelected && "hover:text-destructive text-destructive"}
+              ${!isSelected && "hover:text-destructive text-destructive"}
             `}>
-          {room.isSelected && (
+          {isSelected && (
             <Icon icon="circleCheck" className="fill-green-600 text-white" />
           )}
-          {room.isSelected ? "Selected" : "Select"}
+          {isSelected ? "Selected" : "Select"}
         </Button>
       </div>
     </article>

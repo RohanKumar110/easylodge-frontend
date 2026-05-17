@@ -18,13 +18,7 @@ function HotelDetails() {
     return <p>Something went wrong</p>;
   }
   const hotelInfo = HOTEL_INFO;
-  const hotelData = {
-    ...data,
-    rooms: data.rooms.map((room, index) => ({
-      ...room,
-      isSelected: index === 0,
-    })),
-  };
+  const hotelData = data;
 
   return (
     <div className="container mt-6 mb-12">

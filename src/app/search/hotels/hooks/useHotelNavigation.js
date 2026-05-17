@@ -9,6 +9,7 @@ function useHotelNavigation(hotelId) {
   const checkOut = searchParams.get(SEARCH_PARAMS_KEYS.CHECKOUT);
 
   const queries = {
+    city: searchParams.get(SEARCH_PARAMS_KEYS.CITY),
     startDate: checkIn
       ? dayjs(checkIn).format("YYYY-MM-DD")
       : dayjs().format("YYYY-MM-DD"),
@@ -16,6 +17,7 @@ function useHotelNavigation(hotelId) {
     endDate: checkOut
       ? dayjs(checkOut).format("YYYY-MM-DD")
       : dayjs().add(1, "day").format("YYYY-MM-DD"),
+    roomsCount: searchParams.get(SEARCH_PARAMS_KEYS.ROOMS),
   };
 
   const params = new URLSearchParams(queries);

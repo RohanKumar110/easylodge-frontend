@@ -1,39 +1,63 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
-import React, { useState } from "react";
+import React, { useMemo } from "react";
 import { formatCompactNumber } from "@/lib/utils";
-import { HoverCard, HoverCardContent } from "@/components/ui/hover-card";
-import { HoverCardTrigger } from "@/components/ui/hover-card";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import useFetchSelectedRoom from "./hooks/useFetchSelectedRoom";
+import HotelCheckoutSummary from "./hotel-checkout-summary";
 
-function HotelCheckoutCard({ rooms, cancellationPolicy }) {
-  const selectedRoom = rooms?.find((r) => r.isSelected);
+function HotelCheckoutCard({ rooms = [], cancellationPolicy = [] }) {
+  const selectedRoomDetails = useFetchSelectedRoom(rooms);
+  const {
+    selectedRoom,
+    nightlyPrice,
+    totalPrice,
+    originalPrice,
+    savings,
+    nights,
+    roomsCount,
+  } = selectedRoomDetails;
 
-  const [numberofGuest, setNumberOfGuest] = useState(
-    Math.floor(Math.random() * (10000 - 300 + 1)) + 100
+  const numberOfGuests = useMemo(
+    () => Math.floor(Math.random() * (10000 - 300 + 1)) + 300,
+    []
   );
+
+  if (!selectedRoom) {
+    return <p className="text-sm text-muted-foreground">No room selected.</p>;
+  }
+
   return (
     <div className="space-y-6">
       <div>
-        <div className="flex-1 flex gap-2 items-center">
-          <span className="text-2xl font-bold">{`$${selectedRoom.price.toLocaleString()}`}</span>
-          <span className="text-base text-muted-foreground line-through">{`$${(selectedRoom.price * 1.24).toLocaleString()}`}</span>
+        <div className="flex items-center gap-2">
+          <span className="text-2xl font-bold">
+            ${totalPrice.toLocaleString()}
+          </span>
+
+          {originalPrice > totalPrice && (
+            <span className="text-base line-through text-muted-foreground">
+              ${originalPrice.toLocaleString()}
+            </span>
+          )}
         </div>
+
+        <p className="text-xs text-muted-foreground">
+          ${nightlyPrice.toLocaleString()} per night × {nights} night
+          {nights > 1 ? "s" : ""} × {roomsCount} room
+          {roomsCount > 1 ? "s" : ""}
+        </p>
       </div>
 
-      <div className="space-y-3">
-        <div className="flex items-center justify-between">
-          <span className="text-sm">Your Savings</span>
-          <span className="text-sm font-bold">
-            ${(selectedRoom.price * 0.24).toFixed(2)}
-          </span>
-        </div>
+      <HotelCheckoutSummary selectedRoomDetails={selectedRoomDetails} />
 
-        <div className="flex items-center justify-between">
-          <span className="text-sm">Total Price</span>
-          <span className="text-sm font-bold">
-            ${selectedRoom.price.toFixed(2)}
-          </span>
-        </div>
+      <div className="space-y-3">
+        <PriceRow label="Your Savings" value={savings} />
+        <PriceRow label="Total Price" value={totalPrice} />
       </div>
 
       <Button
@@ -49,7 +73,8 @@ function HotelCheckoutCard({ rooms, cancellationPolicy }) {
           className="mt-0.75 shrink-0 fill-rose-600 text-rose-600"
         />
         <p className="text-sm font-medium text-rose-600">
-          {`${formatCompactNumber(numberofGuest)} people booked this room in last 6 months`}
+          {formatCompactNumber(numberOfGuests)} people booked this room in last
+          6 months
         </p>
       </div>
 
@@ -58,20 +83,33 @@ function HotelCheckoutCard({ rooms, cancellationPolicy }) {
   );
 }
 
+function PriceRow({ label, value }) {
+  return (
+    <div className="flex items-center justify-between">
+      <span className="text-sm">{label}</span>
+      <span className="text-sm font-bold">${value.toFixed(2)}</span>
+    </div>
+  );
+}
+
 function CancellationPolicy({ cancellationPolicy }) {
+  if (!cancellationPolicy.length) return null;
+
   return (
     <HoverCard openDelay={100}>
-      <HoverCardTrigger className="cursor-pointer">
-        <div className="flex gap-1 text-rose-600 items-center">
-          <p className="text-sm font-medium">Cancellation Policy</p>
+      <HoverCardTrigger asChild>
+        <button className="flex items-center gap-1 text-rose-600">
+          <span className="text-sm font-medium">Cancellation Policy</span>
           <Icon icon="info" size="16" />
-        </div>
+        </button>
       </HoverCardTrigger>
+
       <HoverCardContent
         align="center"
         side="left"
         className="w-87.5 space-y-3 border-border">
-        <h3 className="text-base font-semibold mb-1">Cancellation Policy</h3>
+        <h3 className="mb-1 text-base font-semibold">Cancellation Policy</h3>
+
         <ul className="pl-4 space-y-3 list-disc">
           {cancellationPolicy.map((policy, index) => (
             <li key={index}>{policy}</li>
