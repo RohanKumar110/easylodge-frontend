@@ -22,6 +22,7 @@ import {
   Plus,
   LogOut,
   CalendarClock,
+  Shield,
 } from "lucide-react";
 
 export default {
@@ -106,4 +107,5 @@ export default {
   plus: Plus,
   logout: LogOut,
   bookingHistory: CalendarClock,
+  shield: Shield,
 };
