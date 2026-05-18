@@ -8,7 +8,10 @@ import Header from "@/components/layouts/header.layout";
 import Footer from "@/components/layouts/footer.layout";
 import PATHS from "@/config/path.config";
 import CheckoutPage from "./checkout";
-import { WithAuthProvider } from "@/lib/providers/auth-context-provider";
+import {
+  WithAuthProvider,
+  WithoutAuthProvider,
+} from "@/lib/providers/auth-context-provider";
 
 function Router() {
   return (
@@ -16,8 +19,12 @@ function Router() {
       <Header />
       <Routes>
         <Route path={PATHS.LANDING} element={<Home />} />
-        <Route path={PATHS.SIGN_IN} element={<SignInPage />} />
-        <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
+
+        <Route element={<WithoutAuthProvider />}>
+          <Route path={PATHS.SIGN_IN} element={<SignInPage />} />
+          <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
+        </Route>
+
         <Route path={PATHS.SEARCH_HOTELS} element={<SearchPage />} />
         <Route path={PATHS.HOTEL_DETAIL} element={<HotelDetails />} />
         <Route element={<WithAuthProvider />}>

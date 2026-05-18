@@ -5,6 +5,7 @@ import { Navigate, Outlet, useLocation } from "react-router";
 import { getEncodedRedirecturl } from "../utils";
 import { getLocalStorageItem } from "../store.manager";
 import { AUTH_TOKEN_KEY } from "@/config/storage.config";
+import PATHS from "@/config/path.config";
 
 const AuthContext = createContext(null);
 
@@ -18,6 +19,16 @@ function WithAuthProvider() {
     return (
       <Navigate to={`/signin?${getEncodedRedirecturl(redirectUrl)}`} replace />
     );
+  }
+
+  return <Outlet />;
+}
+
+function WithoutAuthProvider() {
+  const { isAuthenticated } = useAuthContext();
+
+  if (isAuthenticated) {
+    return <Navigate to={PATHS.LANDING} replace />;
   }
 
   return <Outlet />;
@@ -79,5 +90,5 @@ function useAuthContext() {
   return context;
 }
 
-export { useAuthContext, WithAuthProvider };
+export { useAuthContext, WithAuthProvider, WithoutAuthProvider };
 export default AuthContextProvider;
