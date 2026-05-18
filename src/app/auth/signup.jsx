@@ -11,7 +11,7 @@ import Icon from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { Link } from "react-router";
-import useSignUpForm from "./hooks/use-sign-up-form";
+import useSignUpForm from "./hooks/useSignUpForm";
 
 function SignUp() {
   const { form, isLoading, handleSignUpFormSubmit } = useSignUpForm();

@@ -23,7 +23,7 @@ function HotelCard({ id, name, images = [], city, amenities = [], price = 0 }) {
   const navigationUrl = useHotelNavigation(id);
 
   return (
-    <Link to={navigationUrl}>
+    <Link className="inline-block" to={navigationUrl}>
       <article className="flex w-full transition-colors border rounded-lg hover:border-primary">
         <div className="flex flex-1 gap-4 p-4">
           <HotelImages images={images} />

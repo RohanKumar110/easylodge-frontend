@@ -11,7 +11,7 @@ import Icon from "@/components/ui/icon";
 import { Input } from "@/components/ui/input";
 import React, { useState } from "react";
 import { Link } from "react-router";
-import useSignInForm from "./hooks/use-sign-in-form";
+import useSignInForm from "./hooks/useSignInForm";
 
 function SignIn() {
   const { form, isLoading, handleSearchFormSubmit } = useSignInForm();

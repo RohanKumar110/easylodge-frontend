@@ -13,7 +13,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import PATHS from "@/config/path.config";
 import { LinkWithIcon } from "./ui/link-with-icon";
 import Icon from "./ui/icon";
-import useLogoutHandler from "@/app/auth/hooks/use-logout";
+import useLogoutHandler from "@/app/auth/hooks/useLogoutHandler";
 
 function AccountMenu({ user }) {
   const { logoutHandler, isLoading } = useLogoutHandler();
