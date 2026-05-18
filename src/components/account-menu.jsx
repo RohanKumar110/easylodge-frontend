@@ -18,66 +18,80 @@ import useLogoutHandler from "@/app/auth/hooks/use-logout";
 function AccountMenu({ user }) {
   const { logoutHandler, isLoading } = useLogoutHandler();
 
+  if (!user) return null;
+
+  const userName = user.name || "User";
+  const userEmail = user.email || "";
+  const avatarUrl = `https://api.dicebear.com/9.x/dylan/svg?seed=${encodeURIComponent(
+    userName
+  )}`;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Avatar className="size-11 cursor-pointer border-2 border-white/20">
+        <Avatar className="border-2 cursor-pointer size-11 border-white/20">
           <AvatarImage
             className="object-cover scale-125"
-            src={`https://api.dicebear.com/9.x/dylan/svg?seed=${user.name}`}
-            alt={`Profile image for ${user.name}`}
+            src={avatarUrl}
+            alt={`Profile image for ${userName}`}
           />
-          <AvatarFallback className="bg-white text-primary font-semibold">
-            {user.name?.charAt(0)}
+          <AvatarFallback className="font-semibold bg-white text-primary">
+            {userName.charAt(0).toUpperCase()}
           </AvatarFallback>
         </Avatar>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-57.5 py-3 px-2 border-border **:cursor-pointer">
+
+      <DropdownMenuContent className="w-57.5 px-2 py-3 border-border **:cursor-pointer">
         <DropdownMenuLabel>
           <div className="flex items-center gap-2 px-1">
             <Avatar>
               <AvatarImage
-                src={`https://api.dicebear.com/9.x/dylan/svg?seed=${user.name}`}
-                alt={`Profile image for ${user.name}`}
+                src={avatarUrl}
+                alt={`Profile image for ${userName}`}
               />
-              <AvatarFallback>{user.name}</AvatarFallback>
+              <AvatarFallback>
+                {userName.charAt(0).toUpperCase()}
+              </AvatarFallback>
             </Avatar>
-            <div className="flex flex-col gap-0.5 flex-1">
+
+            <div className="flex flex-col flex-1 gap-0.5">
               <h4 className="text-sm font-medium max-w-37.5 truncate">
-                {user.name}
+                {userName}
               </h4>
-              <p className="max-w-37.5 truncate text-muted-foreground text-xs">
-                {user?.email}
+              <p className="text-xs truncate max-w-37.5 text-muted-foreground">
+                {userEmail}
               </p>
             </div>
           </div>
         </DropdownMenuLabel>
+
         <DropdownMenuSeparator className="my-3" />
-        <DropdownMenuItem>
-          <Button asChild variant="ghost" className="w-full flex justify-start">
-            <Link
-              to={PATHS.PROFILE}
-              className="flex items-center justify-start gap-2">
-              <Icon icon="user" size={20} />
-              <span>My Profile</span>
-            </Link>
-          </Button>
+
+        <DropdownMenuItem asChild>
+          <Link
+            to={PATHS.PROFILE}
+            className="flex items-center justify-start w-full gap-2 px-2 py-1.5">
+            <Icon icon="user" size={20} />
+            <span>My Profile</span>
+          </Link>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
           <LinkWithIcon
             icon="bookingHistory"
             variant="ghost"
-            className="w-full flex justify-start"
+            className="flex justify-start w-full"
             to={PATHS.BOOKING_HISTORY}>
             My Bookings
           </LinkWithIcon>
         </DropdownMenuItem>
-        <DropdownMenuItem>
+
+        <DropdownMenuItem asChild>
           <Button
             onClick={logoutHandler}
             disabled={isLoading}
             variant="ghost"
-            className="w-full flex justify-start">
+            className="flex justify-start w-full">
             <div className="flex items-center justify-start gap-2">
               <Icon icon="logout" size={20} />
               <span>Logout</span>

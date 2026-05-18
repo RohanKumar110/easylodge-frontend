@@ -33,7 +33,25 @@ function useConfirmCheckout() {
     form.reset(data);
   }
 
-  return { form, handleUpdateDetailsFormSubmit };
+  function handleCheckoutConfirmSubmit() {
+    const queries = {
+      city: searchParams.get(SEARCH_PARAMS_KEYS.CITY) || "",
+      startDate: dayjs(searchParams.get(SEARCH_PARAMS_KEYS.CHECKIN)).format(
+        "YYYY-MM-DD"
+      ),
+      endDate: dayjs(searchParams.get(SEARCH_PARAMS_KEYS.CHECKOUT)).format(
+        "YYYY-MM-DD"
+      ),
+      roomsCount: Number(searchParams.get(SEARCH_PARAMS_KEYS.ROOMS)),
+      selectedRcid: searchParams.get(SEARCH_PARAMS_KEYS.SELECTED_ROOM),
+    };
+
+    const params = new URLSearchParams(queries);
+    const url = `/hotels/${hotelId}/checkout?${params.toString()}`;
+    navigate(url);
+  }
+
+  return { form, handleUpdateDetailsFormSubmit, handleCheckoutConfirmSubmit };
 }
 
 export default useConfirmCheckout;

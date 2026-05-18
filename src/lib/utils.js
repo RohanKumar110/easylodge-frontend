@@ -1,3 +1,4 @@
+import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
@@ -14,4 +15,8 @@ export function formatCompactNumber(number) {
     return `${Math.floor(number / 1000)}k+`;
   }
   return `${number}+`;
+}
+
+export function getEncodedRedirecturl(next) {
+  return `${SEARCH_PARAMS_KEYS.NEXT_REDIRECT}=${encodeURIComponent(next || "/")}`;
 }

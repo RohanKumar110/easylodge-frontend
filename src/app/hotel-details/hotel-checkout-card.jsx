@@ -1,4 +1,3 @@
-import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import React, { useMemo } from "react";
 import { formatCompactNumber } from "@/lib/utils";
@@ -11,60 +10,21 @@ import useFetchSelectedRoom from "./hooks/useFetchSelectedRoom";
 import HotelCheckoutSummary from "./hotel-checkout-summary";
 
 function HotelCheckoutCard({ rooms = [], cancellationPolicy = [] }) {
+
   const selectedRoomDetails = useFetchSelectedRoom(rooms);
-  const {
-    selectedRoom,
-    nightlyPrice,
-    totalPrice,
-    originalPrice,
-    savings,
-    nights,
-    roomsCount,
-  } = selectedRoomDetails;
 
   const numberOfGuests = useMemo(
     () => Math.floor(Math.random() * (10000 - 300 + 1)) + 300,
     []
   );
 
-  if (!selectedRoom) {
+  if (!selectedRoomDetails.selectedRoom) {
     return <p className="text-sm text-muted-foreground">No room selected.</p>;
   }
 
   return (
     <div className="space-y-6">
-      <div>
-        <div className="flex items-center gap-2">
-          <span className="text-2xl font-bold">
-            ${totalPrice.toLocaleString()}
-          </span>
-
-          {originalPrice > totalPrice && (
-            <span className="text-base line-through text-muted-foreground">
-              ${originalPrice.toLocaleString()}
-            </span>
-          )}
-        </div>
-
-        <p className="text-xs text-muted-foreground">
-          ${nightlyPrice.toLocaleString()} per night × {nights} night
-          {nights > 1 ? "s" : ""} × {roomsCount} room
-          {roomsCount > 1 ? "s" : ""}
-        </p>
-      </div>
-
       <HotelCheckoutSummary selectedRoomDetails={selectedRoomDetails} />
-
-      <div className="space-y-3">
-        <PriceRow label="Your Savings" value={savings} />
-        <PriceRow label="Total Price" value={totalPrice} />
-      </div>
-
-      <Button
-        className="w-full h-12 text-base font-semibold"
-        aria-label="Continue to Book">
-        Continue to Book
-      </Button>
 
       <div className="flex gap-1">
         <Icon
@@ -79,15 +39,6 @@ function HotelCheckoutCard({ rooms = [], cancellationPolicy = [] }) {
       </div>
 
       <CancellationPolicy cancellationPolicy={cancellationPolicy} />
-    </div>
-  );
-}
-
-function PriceRow({ label, value }) {
-  return (
-    <div className="flex items-center justify-between">
-      <span className="text-sm">{label}</span>
-      <span className="text-sm font-bold">${value.toFixed(2)}</span>
     </div>
   );
 }

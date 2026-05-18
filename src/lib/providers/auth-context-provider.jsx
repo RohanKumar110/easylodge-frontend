@@ -1,17 +1,31 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useQuery from "../hooks/useQuery";
 import API_CONFIG from "@/config/api.config";
+import { Navigate, Outlet, useLocation } from "react-router";
+import { getEncodedRedirecturl } from "../utils";
+import { getLocalStorageItem } from "../store.manager";
+import { AUTH_TOKEN_KEY } from "@/config/storage.config";
 
-const AuthContext = createContext({
-  isAuthenticated: false,
-  authenticatedUser: null,
-  setAuth: () => {},
-  refetchCurrentUser: () => {},
-});
+const AuthContext = createContext(null);
+
+function WithAuthProvider() {
+  const location = useLocation();
+  const { isAuthenticated } = useAuthContext();
+
+  if (!isAuthenticated) {
+    const redirectUrl = `${location.pathname}${location.search}`;
+
+    return (
+      <Navigate to={`/signin?${getEncodedRedirecturl(redirectUrl)}`} replace />
+    );
+  }
+
+  return <Outlet />;
+}
 
 function AuthContextProvider({ children }) {
   const [auth, setAuth] = useState({
-    isAuthenticated: false,
+    isAuthenticated: !!getLocalStorageItem(AUTH_TOKEN_KEY),
     authenticatedUser: null,
   });
 
@@ -39,9 +53,17 @@ function AuthContextProvider({ children }) {
     return <p>Loading...</p>;
   }
 
+  function refetchCurrentUser() {
+    return refetchQuery();
+  }
+
   return (
     <AuthContext.Provider
-      value={{ refetchCurrentUser: refetchQuery, setAuth, ...auth }}>
+      value={{
+        ...auth,
+        setAuth,
+        refetchCurrentUser,
+      }}>
       {children}
     </AuthContext.Provider>
   );
@@ -57,5 +79,5 @@ function useAuthContext() {
   return context;
 }
 
-export { useAuthContext };
+export { useAuthContext, WithAuthProvider };
 export default AuthContextProvider;

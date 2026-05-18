@@ -1,17 +1,21 @@
 import API_CONFIG from "@/config/api.config";
 import useMutation from "@/lib/hooks/useMutation";
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router";
+import { useNavigate, useSearchParams } from "react-router";
 import { toast } from "sonner";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "@/lib/validators/auth-form-validator";
 import { AUTH_TOKEN_KEY } from "@/config/storage.config";
 import { setLocalStorageItem } from "@/lib/store.manager";
 import { useAuthContext } from "@/lib/providers/auth-context-provider";
+import PATHS from "@/config/path.config";
+import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 
 function useSignInForm() {
   const navigate = useNavigate();
-  const { refetchCurrentUser } = useAuthContext();
+  const [searchParams] = useSearchParams();
+  const next = searchParams.get(SEARCH_PARAMS_KEYS.NEXT_REDIRECT);
+  const { setAuth, refetchCurrentUser } = useAuthContext();
 
   const { mutate, data, isLoading, error } = useMutation(
     API_CONFIG.AUTH.SIGN_IN,
@@ -30,13 +34,20 @@ function useSignInForm() {
 
   async function handleSearchFormSubmit(formData) {
     mutate(formData, {
-      onSuccess: (res) => {
+      onSuccess: async (res) => {
         toast("Signed in successfully", {
           type: "success",
         });
         setLocalStorageItem(AUTH_TOKEN_KEY, res.data.accessToken);
-        refetchCurrentUser();
-        navigate("/", { replace: true });
+        setAuth((prev) => ({
+          ...prev,
+          isAuthenticated: true,
+        }));
+        await refetchCurrentUser();
+        console.log()
+        navigate(next || PATHS.LANDING, {
+          replace: true,
+        });
       },
       onError: (err) => {
         toast("Error:", {

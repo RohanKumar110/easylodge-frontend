@@ -7,6 +7,8 @@ import { BrowserRouter, Route, Routes } from "react-router";
 import Header from "@/components/layouts/header.layout";
 import Footer from "@/components/layouts/footer.layout";
 import PATHS from "@/config/path.config";
+import CheckoutPage from "./checkout";
+import { WithAuthProvider } from "@/lib/providers/auth-context-provider";
 
 function Router() {
   return (
@@ -18,6 +20,9 @@ function Router() {
         <Route path={PATHS.SIGN_UP} element={<SignUpPage />} />
         <Route path={PATHS.SEARCH_HOTELS} element={<SearchPage />} />
         <Route path={PATHS.HOTEL_DETAIL} element={<HotelDetails />} />
+        <Route element={<WithAuthProvider />}>
+          <Route path={PATHS.CHECKOUT} element={<CheckoutPage />} />
+        </Route>
       </Routes>
       <Footer />
     </BrowserRouter>

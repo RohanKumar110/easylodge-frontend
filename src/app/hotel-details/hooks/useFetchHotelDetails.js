@@ -13,6 +13,7 @@ function useFetchHotelDetails() {
 
   const startDate = checkIn ? dayjs(checkIn).format("YYYY-MM-DD") : undefined;
   const endDate = checkOut ? dayjs(checkOut).format("YYYY-MM-DD") : undefined;
+  const roomsCount = Number(searchParams.get(SEARCH_PARAMS_KEYS.ROOMS));
 
   const { data, isLoading, error } = useQuery(
     API_CONFIG.HOTEL.HOTEL_INFO(hotelId),
@@ -20,6 +21,7 @@ function useFetchHotelDetails() {
       params: {
         startDate,
         endDate,
+        roomsCount,
       },
     }
   );

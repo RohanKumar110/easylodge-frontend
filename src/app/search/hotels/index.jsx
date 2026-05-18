@@ -3,7 +3,6 @@ import HotelCard from "./components/hotel-card";
 import HotelCardSkeleton from "./components/hotel-card-skeleton";
 
 function SearchedHotels({ isLoading, hotels, error }) {
-
   if (isLoading) {
     return (
       <div className="space-y-4">
@@ -17,7 +16,7 @@ function SearchedHotels({ isLoading, hotels, error }) {
     <div className="space-y-4">
       {hotels.map((hotelItem) => (
         <HotelCard
-          key={hotelItem.hotel.id}
+          key={`${hotelItem.hotel.id}-${hotelItem.price}`}
           {...hotelItem.hotel}
           price={hotelItem.price}
         />

@@ -10,6 +10,8 @@ const PATHS = {
   PROFILE: "/me/profile",
 
   BOOKING_HISTORY: "/me/booking-history",
+
+  CHECKOUT: "/hotels/:hotelId/checkout",
 };
 
 export default PATHS;
