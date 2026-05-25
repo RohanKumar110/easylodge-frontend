@@ -32,6 +32,10 @@ function useSearchForm() {
     defaultValues,
   });
 
+  useEffect(() => {
+    form.reset(defaultValues);
+  }, [searchParams]);
+
   function handleSearchFormSubmit(data) {
     const params = new URLSearchParams({
       city: data.city,

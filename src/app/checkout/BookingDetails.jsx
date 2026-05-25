@@ -2,6 +2,7 @@ import Icon from "@/components/ui/icon";
 import { Separator } from "@/components/ui/separator";
 import dayjs from "dayjs";
 import React from "react";
+import CheckOutGuests from "./guests/checkout-guests";
 
 function BookingDetails({ booking }) {
   const checkInDate = dayjs(booking.checkInDate)
@@ -84,6 +85,7 @@ function BookingDetails({ booking }) {
           <p className="text-sm font-medium">{booking.room.type}</p>
         </div>
       </div>
+      <CheckOutGuests bookingId={booking.id} />
       <Separator />
       <div className="px-4 space-y-4">
         <div className="flex items-center justify-between">
