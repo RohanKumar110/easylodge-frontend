@@ -34,7 +34,7 @@ function GuestsPicker({
   });
 
   const { mutate, isLoading, error } = useMutation(
-    API_CONFIG.BOOKING.ADD_BOOKING_GUESTS(bookingId),
+    API_CONFIG.BOOKING.ADD_BOOKING_TRAVELLERS(bookingId),
     "POST"
   );
 

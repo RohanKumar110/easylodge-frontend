@@ -23,6 +23,8 @@ import {
   LogOut,
   CalendarClock,
   Shield,
+  Mars,
+  Venus,
 } from "lucide-react";
 
 export default {
@@ -108,4 +110,6 @@ export default {
   logout: LogOut,
   bookingHistory: CalendarClock,
   shield: Shield,
+  male: Mars,
+  female: Venus,
 };

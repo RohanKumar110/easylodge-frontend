@@ -14,16 +14,16 @@ const API_CONFIG = {
   },
   BOOKING: {
     INIT_BOOKING: "/bookings/init",
-    ADD_BOOKING_GUESTS: (bookingId) => `/bookings/${bookingId}/guests`,
+    ADD_BOOKING_TRAVELLERS: (bookingId) => `/bookings/${bookingId}/guests`,
     BOOKING_PAYMENT: (bookingId) => `/bookings/${bookingId}/payments`,
     BOOKING_STATUS: (bookingId) => `/bookings/${bookingId}/status`,
     BOOKING_CANCEL: (bookingId) => `/bookings/${bookingId}/cancel`,
   },
-  GUESTS: {
-    GET_GUESTS: "/users/guests",
-    CREATE_GUESTS: "/users/guests",
-    UPDATE_GUEST: (guestId) => `/users/guests/${guestId}`,
-    DELETE_GUEST: (guestId) => `/users/guests/${guestId}`,
+  TRAVELLER: {
+    GET_TRAVELLERS: "/users/guests",
+    CREATE_TRAVELLERS: "/users/guests",
+    UPDATE_TRAVELLER: (guestId) => `/users/guests/${guestId}`,
+    DELETE_TRAVELLER: (guestId) => `/users/guests/${guestId}`,
   },
 };
 

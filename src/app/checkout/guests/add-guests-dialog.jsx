@@ -9,7 +9,7 @@ import {
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import React, { useState } from "react";
-import AddNewTravellerDialog from "./add-new-traveller-dialog";
+import AddNewTraveller from "./add-new-traveller-dialog";
 import GuestsPicker from "./guests-picker";
 import TravellerContextProvider from "@/lib/providers/travellers-context-provider";
 
@@ -31,13 +31,13 @@ function AddGuestsDialog({ bookingId, bookingGuests, setBookingGuests }) {
       <AlertDialogContent>
         <TravellerContextProvider>
           <AlertDialogHeader>
-            <AlertDialogTitle autoFocus>Add Guest</AlertDialogTitle>
+            <AlertDialogTitle>Add Guest</AlertDialogTitle>
 
             <AlertDialogDescription>
               Select or add travellers for this booking.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AddNewTravellerDialog />
+          <AddNewTraveller />
           <GuestsPicker
             bookingId={bookingId}
             bookingGuests={bookingGuests || []}

@@ -177,3 +177,8 @@ export const SEARCH_PARAMS_KEYS = {
   PRICE_RANGE: "priceRange",
   NEXT_REDIRECT: "next",
 };
+
+export const ERROR_FALLBACK = {
+  TITLE: "Internal Server Error",
+  DESCRIPTION: "Something went wrong. Please try again later.",
+};

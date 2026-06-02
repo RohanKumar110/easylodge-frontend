@@ -7,7 +7,9 @@ const TravellerContext = createContext(null);
 function TravellerContextProvider({ children }) {
   const [travellers, setTravellers] = useState([]);
 
-  const { data, isLoading, error } = useQuery(API_CONFIG.GUESTS.CREATE_GUESTS);
+  const { data, isLoading, refetchQuery, error } = useQuery(
+    API_CONFIG.TRAVELLER.GET_TRAVELLERS
+  );
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -15,9 +17,13 @@ function TravellerContextProvider({ children }) {
     }
   }, [isLoading, data]);
 
+  function refetchGuests() {
+    return refetchQuery();
+  }
+
   return (
     <TravellerContext.Provider
-      value={{ isLoading, error, travellers, setTravellers }}>
+      value={{ isLoading, error, travellers, setTravellers, refetchGuests }}>
       {children}
     </TravellerContext.Provider>
   );
