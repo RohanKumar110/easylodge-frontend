@@ -45,7 +45,6 @@ function GuestsPicker({
   function handleAddGuestClick(data) {
     mutate(data.guests, {
       onSuccess: (res) => {
-        console.log(res);
         setBookingGuests(res.data);
         toast("Guest Added Successfully", {
           type: "success",
@@ -69,44 +68,53 @@ function GuestsPicker({
           name="guests"
           render={() => (
             <FormItem>
-              {travellers.map((traveller) => (
-                <FormField
-                  key={traveller.id}
-                  control={form.control}
-                  name="guests"
-                  render={({ field }) => {
-                    return (
-                      <FormItem
-                        key={traveller.id}
-                        className="flex flex-row items-center justify-between space-y-0">
-                        <FormItem className="flex flex-row items-center gap-2 space-y-0">
-                          <FormControl>
-                            <Checkbox
-                              className="w-5 h-5 border-muted-foreground data-[state=checked]:border-primary"
-                              checked={field.value?.includes(traveller.id)}
-                              onCheckedChange={(checked) => {
-                                return checked
-                                  ? field.onChange([
-                                      ...field.value,
-                                      traveller.id,
-                                    ])
-                                  : field.onChange(
-                                      field.value?.filter(
-                                        (value) => value !== traveller.id
-                                      )
-                                    );
-                              }}
-                            />
-                          </FormControl>
-                          <FormLabel className="text-sm font-medium">
-                            {traveller.name}
-                          </FormLabel>
+              {travellers.length === 0 ? (
+                <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
+                  <p className="text-sm font-medium">No travellers available</p>
+                  <p className="text-xs text-muted-foreground">
+                    Add a new traveller first to include them as a guest.
+                  </p>
+                </div>
+              ) : (
+                travellers.map((traveller) => (
+                  <FormField
+                    key={traveller.id}
+                    control={form.control}
+                    name="guests"
+                    render={({ field }) => {
+                      return (
+                        <FormItem
+                          key={traveller.id}
+                          className="flex flex-row items-center justify-between space-y-0">
+                          <FormItem className="flex flex-row items-center gap-2 space-y-0">
+                            <FormControl>
+                              <Checkbox
+                                className="w-5 h-5 border-muted-foreground data-[state=checked]:border-primary"
+                                checked={field.value?.includes(traveller.id)}
+                                onCheckedChange={(checked) => {
+                                  return checked
+                                    ? field.onChange([
+                                        ...field.value,
+                                        traveller.id,
+                                      ])
+                                    : field.onChange(
+                                        field.value?.filter(
+                                          (value) => value !== traveller.id
+                                        )
+                                      );
+                                }}
+                              />
+                            </FormControl>
+                            <FormLabel className="text-sm font-medium">
+                              {traveller.name}
+                            </FormLabel>
+                          </FormItem>
                         </FormItem>
-                      </FormItem>
-                    );
-                  }}
-                />
-              ))}
+                      );
+                    }}
+                  />
+                ))
+              )}
               <FormMessage />
             </FormItem>
           )}

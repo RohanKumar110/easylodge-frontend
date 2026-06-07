@@ -30,14 +30,13 @@ function AddGuestsDialog({ bookingId, bookingGuests, setBookingGuests }) {
       </AlertDialogTrigger>
       <AlertDialogContent>
         <TravellerContextProvider>
-          <AlertDialogHeader>
-            <AlertDialogTitle>Add Guest</AlertDialogTitle>
-
-            <AlertDialogDescription>
-              Select or add travellers for this booking.
+          <AlertDialogHeader className="flex flex-row items-center justify-between">
+            <AlertDialogTitle className="font-bold">Add Guest</AlertDialogTitle>
+            <AddNewTraveller />
+            <AlertDialogDescription className="sr-only">
+              Select travellers to add as guests to this booking.
             </AlertDialogDescription>
           </AlertDialogHeader>
-          <AddNewTraveller />
           <GuestsPicker
             bookingId={bookingId}
             bookingGuests={bookingGuests || []}

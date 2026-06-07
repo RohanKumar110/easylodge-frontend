@@ -85,7 +85,7 @@ function BookingDetails({ booking }) {
           <p className="text-sm font-medium">{booking.room.type}</p>
         </div>
       </div>
-      <CheckOutGuests bookingId={booking.id} />
+      <CheckOutGuests bookingId={booking.id} bookingGuests={booking.guests} />
       <Separator />
       <div className="px-4 space-y-4">
         <div className="flex items-center justify-between">

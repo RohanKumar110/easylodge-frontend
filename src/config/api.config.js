@@ -18,6 +18,7 @@ const API_CONFIG = {
     BOOKING_PAYMENT: (bookingId) => `/bookings/${bookingId}/payments`,
     BOOKING_STATUS: (bookingId) => `/bookings/${bookingId}/status`,
     BOOKING_CANCEL: (bookingId) => `/bookings/${bookingId}/cancel`,
+    REMOVE_BOOKING_TRAVELLER: (bookingId) => `/bookings/${bookingId}/guests`,
   },
   TRAVELLER: {
     GET_TRAVELLERS: "/users/guests",

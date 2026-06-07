@@ -61,8 +61,10 @@ axiosInstance.interceptors.response.use(
     const { response, config: originalRequest } = error;
     const status = response?.status;
 
-    if (originalRequest.url === API_CONFIG.AUTH.REFRESH) {
+    if (originalRequest.url?.includes(API_CONFIG.AUTH.REFRESH)) {
       rejectQueue(error);
+      isRefreshing = false;
+      requestQueue = [];
       await clearSession();
       return Promise.reject(error);
     }
