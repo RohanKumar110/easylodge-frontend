@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import useInitCheckout from "./hooks/useInitCheckout";
 import { Separator } from "@/components/ui/separator";
-import BookingDetails from "./BookingDetails";
-import InitiatePaymentsButton from "./InitiatePaymentsButton";
+import BookingDetails from "./booking-details";
+import InitiatePaymentButton from "./init-payment-button";
 
 function CheckoutPage() {
   const { data, isLoading, error, initCheckout } = useInitCheckout();
@@ -28,7 +28,7 @@ function CheckoutPage() {
         <Separator className="my-4" />
         <BookingDetails booking={data || {}} />
         <div className="px-4 mt-6">
-          <InitiatePaymentsButton id={data.id} />
+          <InitiatePaymentButton bookingId={data.id} />
         </div>
       </div>
     </div>

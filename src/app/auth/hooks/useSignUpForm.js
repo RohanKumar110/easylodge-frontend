@@ -34,7 +34,11 @@ function useSignUpForm() {
         });
         navigate("/signin", { replace: true });
       },
-      onError: (err) => {},
+      onError: (err) => {
+        toast(error.status || ERROR_FALLBACK.TITLE, {
+          type: "error",
+        });
+      },
     });
   }
 

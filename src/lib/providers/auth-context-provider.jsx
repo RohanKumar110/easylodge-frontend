@@ -52,7 +52,7 @@ function AuthContextProvider({ children }) {
         authenticatedUser: data,
         isAuthenticated: true,
       });
-    } else {
+    } else if (error) {
       setAuth({
         authenticatedUser: null,
         isAuthenticated: false,

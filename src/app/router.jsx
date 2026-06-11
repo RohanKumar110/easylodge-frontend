@@ -12,6 +12,7 @@ import {
   WithAuthProvider,
   WithoutAuthProvider,
 } from "@/lib/providers/auth-context-provider";
+import PaymentStatus from "./payment";
 
 function Router() {
   return (
@@ -28,6 +29,7 @@ function Router() {
         <Route path={PATHS.SEARCH_HOTELS} element={<SearchPage />} />
         <Route path={PATHS.HOTEL_DETAIL} element={<HotelDetails />} />
         <Route element={<WithAuthProvider />}>
+          <Route path={PATHS.PAYMENT_STATUS} element={<PaymentStatus />} />
           <Route path={PATHS.CHECKOUT} element={<CheckoutPage />} />
         </Route>
       </Routes>

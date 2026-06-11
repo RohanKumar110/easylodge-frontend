@@ -12,6 +12,7 @@ const PATHS = {
   BOOKING_HISTORY: "/me/booking-history",
 
   CHECKOUT: "/hotels/:hotelId/checkout",
+  PAYMENT_STATUS: "payments/:bookingId/status",
 };
 
 export default PATHS;
