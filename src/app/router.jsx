@@ -13,6 +13,10 @@ import {
   WithoutAuthProvider,
 } from "@/lib/providers/auth-context-provider";
 import PaymentStatus from "./payment";
+import SettingsLayout from "./settings/settings-layout";
+import Profile from "./settings/profile";
+import BookingHistory from "./settings/bookings";
+import TravellersManagement from "./settings/travellers";
 
 function Router() {
   return (
@@ -28,9 +32,22 @@ function Router() {
 
         <Route path={PATHS.SEARCH_HOTELS} element={<SearchPage />} />
         <Route path={PATHS.HOTEL_DETAIL} element={<HotelDetails />} />
+
         <Route element={<WithAuthProvider />}>
-          <Route path={PATHS.PAYMENT_STATUS} element={<PaymentStatus />} />
           <Route path={PATHS.CHECKOUT} element={<CheckoutPage />} />
+          <Route path={PATHS.PAYMENT_STATUS} element={<PaymentStatus />} />
+
+          <Route element={<SettingsLayout />}>
+            <Route path={PATHS.SETTINGS.PROFILE} element={<Profile />} />
+            <Route
+              path={PATHS.SETTINGS.TRAVELLERS_MANAGEMENT}
+              element={<TravellersManagement />}
+            />
+            <Route
+              path={PATHS.SETTINGS.BOOKING_HISTORY}
+              element={<BookingHistory />}
+            />
+          </Route>
         </Route>
       </Routes>
       <Footer />

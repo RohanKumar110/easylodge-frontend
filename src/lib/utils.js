@@ -20,3 +20,7 @@ export function formatCompactNumber(number) {
 export function getEncodedRedirecturl(next) {
   return `${SEARCH_PARAMS_KEYS.NEXT_REDIRECT}=${encodeURIComponent(next || "/")}`;
 }
+
+export function getDefaultProfile(initials) {
+  return `https://api.dicebear.com/9.x/initials/svg?seed=${initials}`;
+}

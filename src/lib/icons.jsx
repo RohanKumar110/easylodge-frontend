@@ -25,6 +25,9 @@ import {
   Shield,
   Mars,
   Venus,
+  Pen,
+  Users,
+  Save,
 } from "lucide-react";
 
 export default {
@@ -112,4 +115,7 @@ export default {
   shield: Shield,
   male: Mars,
   female: Venus,
+  pen: Pen,
+  travellers: Users,
+  save: Save,
 };

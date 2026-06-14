@@ -14,6 +14,7 @@ import PATHS from "@/config/path.config";
 import { LinkWithIcon } from "./ui/link-with-icon";
 import Icon from "./ui/icon";
 import useLogoutHandler from "@/app/auth/hooks/useLogoutHandler";
+import { getDefaultProfile } from "@/lib/utils";
 
 function AccountMenu({ user }) {
   const { logoutHandler, isLoading } = useLogoutHandler();
@@ -22,9 +23,7 @@ function AccountMenu({ user }) {
 
   const userName = user.name || "User";
   const userEmail = user.email || "";
-  const avatarUrl = `https://api.dicebear.com/9.x/dylan/svg?seed=${encodeURIComponent(
-    userName
-  )}`;
+  const avatarUrl = getDefaultProfile(userName.charAt(0));
 
   return (
     <DropdownMenu>
@@ -69,7 +68,7 @@ function AccountMenu({ user }) {
 
         <DropdownMenuItem asChild>
           <Link
-            to={PATHS.PROFILE}
+            to={PATHS.SETTINGS.PROFILE}
             className="flex items-center justify-start w-full gap-2 px-2 py-1.5">
             <Icon icon="user" size={20} />
             <span>My Profile</span>

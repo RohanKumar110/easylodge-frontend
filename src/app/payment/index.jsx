@@ -35,7 +35,10 @@ function PaymentStatus() {
           </div>
         )}
         {paymentStatus === BOOKING_STATUS.CONFIRMED && (
-          <LinkWithIcon to={"/me/booking-history"} icon="bookingHistory">
+          <LinkWithIcon
+            to={"/me/booking-history"}
+            icon="bookingHistory"
+            className="mb-4">
             View Booking History
           </LinkWithIcon>
         )}
