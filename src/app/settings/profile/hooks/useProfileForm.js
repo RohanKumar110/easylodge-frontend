@@ -1,6 +1,8 @@
 import API_CONFIG from "@/config/api.config";
 import useMutation from "@/lib/hooks/useMutation";
 import { useAuthContext } from "@/lib/providers/auth-context-provider";
+import { editProfileSchema } from "@/lib/validators/edit-profile-form-validator";
+import { zodResolver } from "@hookform/resolvers/zod";
 import dayjs from "dayjs";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -11,6 +13,7 @@ function useProfileForm() {
   const { authenticatedUser: user, setAuth } = useAuthContext();
 
   const form = useForm({
+    resolver: zodResolver(editProfileSchema),
     defaultValues: {
       name: user?.name ?? "",
       email: user?.email ?? "",
@@ -38,31 +41,21 @@ function useProfileForm() {
   }, [user]);
 
   async function updateProfileHandler(data) {
-    const year = data?.dateOfBirth?.slice(0, 4);
-    const month = data?.dateOfBirth?.slice(4, 6);
-    const day = data?.dateOfBirth?.slice(6, 8);
-
-    await mutate(
-      {
-        ...data,
-        dateOfBirth: `${year}-${month}-${day}`,
+    await mutate(data, {
+      onSuccess: () => {
+        setAuth((prev) => ({
+          ...prev,
+          authenticatedUser: { ...prev.authenticatedUser, ...data },
+        }));
+        toast("Profile updated successfully", { type: "success" });
       },
-      {
-        onSuccess: () => {
-          setAuth((prev) => ({
-            ...prev,
-            authenticatedUser: { ...prev.authenticatedUser, ...data },
-          }));
-          toast("Profile updated successfully", { type: "success" });
-        },
-        onError: (error) => {
-          toast("Error: " + (err.status || ""), {
-            description: err.message,
-            type: "error",
-          });
-        },
-      }
-    );
+      onError: (error) => {
+        toast("Error: " + (err.status || ""), {
+          description: err.message,
+          type: "error",
+        });
+      },
+    });
   }
 
   return { form, updateProfileHandler, isLoading };

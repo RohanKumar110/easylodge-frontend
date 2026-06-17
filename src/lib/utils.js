@@ -1,5 +1,6 @@
 import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 import { clsx } from "clsx";
+import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
 
 export function cn(...inputs) {
@@ -23,4 +24,20 @@ export function getEncodedRedirecturl(next) {
 
 export function getDefaultProfile(initials) {
   return `https://api.dicebear.com/9.x/initials/svg?seed=${initials}`;
+}
+
+export function isDobValid(value) {
+  const year = value.slice(0, 4);
+  const month = value.slice(4, 6);
+  const day = value.slice(6, 8);
+
+  if (Number(day) > 31 || Number(month) > 12) {
+    return false;
+  }
+
+  const date = dayjs(`${year}-${month}-${day}`, "YYYY-MM-DD", true);
+  if (!date.isValid() || date.isAfter(dayjs())) {
+    return false;
+  }
+  return true;
 }
