@@ -7,6 +7,7 @@ const API_CONFIG = {
   },
   USER: {
     PROFILE: "/users/profile",
+    MY_BOOKINGS: "/users/me/bookings",
   },
   HOTEL: {
     BROWSE_HOTELS: "/hotels/search",

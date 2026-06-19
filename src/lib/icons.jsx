@@ -28,6 +28,9 @@ import {
   Pen,
   Users,
   Save,
+  Dot,
+  DoorOpen,
+  EllipsisVertical,
 } from "lucide-react";
 
 export default {
@@ -118,4 +121,7 @@ export default {
   pen: Pen,
   travellers: Users,
   save: Save,
+  dot: Dot,
+  room: DoorOpen,
+  more: EllipsisVertical,
 };

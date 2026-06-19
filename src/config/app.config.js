@@ -182,3 +182,23 @@ export const ERROR_FALLBACK = {
   TITLE: "Internal Server Error",
   DESCRIPTION: "Something went wrong. Please try again later.",
 };
+
+export const HOTEL_TIMINGS = {
+  CHECKIN: "12:00 PM",
+  CHECKOUT: "11:00 AM",
+};
+
+export const bookingStatusVariant = {
+  CONFIRMED: {
+    className: "border-green-600 bg-green-100 text-green-600",
+    text: "Completed",
+  },
+  CANCELLED: {
+    className: "border-red-600 bg-red-100 text-red-600",
+    text: "Cancelled",
+  },
+  PAYMENTS_PENDING: {
+    className: "border-amber-600 bg-amber-100 text-amber-600",
+    text: "Pending",
+  },
+};
