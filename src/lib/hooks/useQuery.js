@@ -5,7 +5,7 @@ function useQuery(url, options = {}) {
   const optionsKey = JSON.stringify(options);
   const [queryState, setQueryState] = useState({
     data: null,
-    isLoading: false,
+    isLoading: true,
     error: null,
   });
 
