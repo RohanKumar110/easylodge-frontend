@@ -202,3 +202,8 @@ export const bookingStatusVariant = {
     text: "Pending",
   },
 };
+
+export const Roles = {
+  GUEST: "GUEST",
+  HOTEL_MANAGER: "HOTEL_MANAGER",
+};

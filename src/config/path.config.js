@@ -15,6 +15,24 @@ const PATHS = {
     BOOKING_HISTORY: "/me/booking-history",
     TRAVELLERS_MANAGEMENT: "/me/travellers",
   },
+
+  ADMIN: {
+    ROOT: "/admin",
+    LIST_HOTELS: "hotels",
+    CREATE_HOTEL: "hotels/create",
+    DASHBOARD: {
+      ROOT: "hotels/:hotelId",
+      OVERVIEW: "overview",
+      BOOKINGS: "bookings",
+      EDIT_HOTEL: "edit",
+      ROOMS: {
+        ROOT: "rooms",
+        INVENTORY: "rooms/:roomId/inventory",
+        EDIT: "rooms/:roomId/edit",
+        CREATE: "rooms/create",
+      },
+    },
+  },
 };
 
 export default PATHS;

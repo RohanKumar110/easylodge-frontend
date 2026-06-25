@@ -31,6 +31,8 @@ import {
   Dot,
   DoorOpen,
   EllipsisVertical,
+  Hotel,
+  MoveRight,
 } from "lucide-react";
 
 export default {
@@ -124,4 +126,6 @@ export default {
   dot: Dot,
   room: DoorOpen,
   more: EllipsisVertical,
+  rightArrow: MoveRight,
+  hotel: Hotel,
 };

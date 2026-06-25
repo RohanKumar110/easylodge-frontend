@@ -27,6 +27,9 @@ const API_CONFIG = {
     UPDATE_TRAVELLER: (guestId) => `/users/guests/${guestId}`,
     DELETE_TRAVELLER: (guestId) => `/users/guests/${guestId}`,
   },
+  ADMIN: {
+    GET_ADMIN_HOTELS: "/admin/hotels",
+  },
 };
 
 export default API_CONFIG;

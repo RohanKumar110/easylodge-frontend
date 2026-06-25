@@ -6,7 +6,7 @@ import { Link } from "react-router";
 import { useAuthContext } from "@/lib/providers/auth-context-provider";
 import AccountMenu from "../account-menu";
 
-function Header() {
+function Header({ showServiceList = true }) {
   const { isAuthenticated, authenticatedUser } = useAuthContext();
 
   return (
@@ -31,7 +31,7 @@ function Header() {
                 <Link to="/signup" aria-label="Go to Sign Up Page">
                   Register
                 </Link>
-              </Button>
+            </Button>
               <Button
                 className="bg-white cursor-pointer border-primary text-primary rounded-sm hover:bg-white/90"
                 asChild>
@@ -43,22 +43,24 @@ function Header() {
           )}
         </div>
       </div>
-      <div className="container flex gap-1 overflow-x-auto scrollbar">
-        {SERVICE_LIST.map(
-          (service) =>
-            service.show && (
-              <Button
-                asChild
-                key={service.id}
-                className={`bg-transparent shadow-none cursor-pointer rounded-full font-normal hover:bg-white/10 flex items-center justify-between gap-2 px-6 h-11 ${service.active && "border border-white bg-white/10"}`}>
-                <Link to="/">
-                  <Icon icon={service.icon} />
-                  {service.title}
-                </Link>
-              </Button>
-            )
-        )}
-      </div>
+      {showServiceList && (
+        <div className="container flex gap-1 overflow-x-auto scrollbar">
+          {SERVICE_LIST.map(
+            (service) =>
+              service.show && (
+                <Button
+                  asChild
+                  key={service.id}
+                  className={`bg-transparent shadow-none cursor-pointer rounded-full font-normal hover:bg-white/10 flex items-center justify-between gap-2 px-6 h-11 ${service.active && "border border-white bg-white/10"}`}>
+                  <Link to="/">
+                    <Icon icon={service.icon} />
+                    {service.title}
+                  </Link>
+                </Button>
+              )
+          )}
+        </div>
+      )}
     </header>
   );
 }

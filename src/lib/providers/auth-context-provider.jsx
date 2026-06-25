@@ -39,6 +39,7 @@ function AuthContextProvider({ children }) {
     isAuthenticated: !!getLocalStorageItem(AUTH_TOKEN_KEY),
     authenticatedUser: null,
   });
+  const [authChecked, setAuthChecked] = useState(false);
 
   const { data, isLoading, refetchQuery, error } = useQuery(
     API_CONFIG.USER.PROFILE
@@ -48,21 +49,13 @@ function AuthContextProvider({ children }) {
     if (isLoading) return;
 
     if (!error && data) {
-      setAuth({
-        authenticatedUser: data,
-        isAuthenticated: true,
-      });
+      setAuth({ authenticatedUser: data, isAuthenticated: true });
+      setAuthChecked(true);
     } else if (error) {
-      setAuth({
-        authenticatedUser: null,
-        isAuthenticated: false,
-      });
+      setAuth({ authenticatedUser: null, isAuthenticated: false });
+      setAuthChecked(true);
     }
   }, [data, isLoading, error]);
-
-  if (isLoading) {
-    return <p>Loading...</p>;
-  }
 
   function refetchCurrentUser() {
     return refetchQuery();
@@ -73,9 +66,10 @@ function AuthContextProvider({ children }) {
       value={{
         ...auth,
         setAuth,
+        authChecked,
         refetchCurrentUser,
       }}>
-      {children}
+      {isLoading ? <p>Loading...</p> : children}
     </AuthContext.Provider>
   );
 }
