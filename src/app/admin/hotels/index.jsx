@@ -38,16 +38,18 @@ function Hotels() {
             </LinkWithIcon>
           </section>
           <section className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4 my-8">
-            {data.map((hotel) => (
-              <HotelCard key={hotel.id} {...hotel} />
-            ))}
+            {[...data]
+              .sort((a, b) => a.name.localeCompare(b.name))
+              .map((hotel) => (
+                <HotelCard key={hotel.id} {...hotel} />
+              ))}
           </section>
         </>
       )}
     </div>
   );
 }
-function HotelCard({ id, name, images, address }) {
+function HotelCard({ id, name, active, images, address }) {
   return (
     <article className="overflow-hidden border rounded-xl">
       <div>
@@ -60,7 +62,17 @@ function HotelCard({ id, name, images, address }) {
       </div>
       <div className="p-2 space-y-3">
         <div className="space-y-1">
-          <h2 className="text-lg font-semibold">{name}</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="text-lg font-semibold">{name}</h2>
+            <span
+              className={`text-xs font-medium px-2 py-1 rounded-full flex items-center gap-1
+              ${active ? "bg-green-100 text-green-700" : "bg-red-100 text-red-600"}`}>
+              <span
+                className={`w-1.5 h-1.5 rounded-full ${active ? "bg-green-500" : "bg-red-500"}`}
+              />
+              {active ? "Active" : "Inactive"}
+            </span>
+          </div>
           <p className="text-sm text-muted-foreground line-clamp-1">
             {address}
           </p>

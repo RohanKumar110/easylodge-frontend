@@ -33,6 +33,7 @@ import {
   EllipsisVertical,
   Hotel,
   MoveRight,
+  LayoutGrid,
 } from "lucide-react";
 
 export default {
@@ -128,4 +129,5 @@ export default {
   more: EllipsisVertical,
   rightArrow: MoveRight,
   hotel: Hotel,
+  dashboard: LayoutGrid,
 };

@@ -1,4 +1,4 @@
-import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
+import { Roles, SEARCH_PARAMS_KEYS } from "@/config/app.config";
 import { clsx } from "clsx";
 import dayjs from "dayjs";
 import { twMerge } from "tailwind-merge";
@@ -8,7 +8,7 @@ export function cn(...inputs) {
 }
 
 export function getAssetPath(name) {
-  return `assets/${name}`;
+  return `${import.meta.env.BASE_URL}assets/${name}`;
 }
 
 export function formatCompactNumber(number) {
@@ -24,6 +24,10 @@ export function getEncodedRedirecturl(next) {
 
 export function getDefaultProfile(initials) {
   return `https://api.dicebear.com/9.x/initials/svg?seed=${initials}`;
+}
+
+export function isAdmin(user) {
+  return user?.roles.includes(Roles.HOTEL_MANAGER);
 }
 
 export function isDobValid(value) {

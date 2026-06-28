@@ -11,10 +11,9 @@ import { Link } from "react-router";
 import { Button } from "./ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import PATHS from "@/config/path.config";
-import { LinkWithIcon } from "./ui/link-with-icon";
 import Icon from "./ui/icon";
 import useLogoutHandler from "@/app/auth/hooks/useLogoutHandler";
-import { getDefaultProfile } from "@/lib/utils";
+import { getDefaultProfile, isAdmin } from "@/lib/utils";
 
 function AccountMenu({ user }) {
   const { logoutHandler, isLoading } = useLogoutHandler();
@@ -23,7 +22,8 @@ function AccountMenu({ user }) {
 
   const userName = user.name || "User";
   const userEmail = user.email || "";
-  const avatarUrl = getDefaultProfile(userName.charAt(0));
+  const avatarUrl =
+    user.profilePicture || getDefaultProfile(userName.charAt(0));
 
   return (
     <DropdownMenu>
@@ -76,14 +76,24 @@ function AccountMenu({ user }) {
         </DropdownMenuItem>
 
         <DropdownMenuItem asChild>
-          <LinkWithIcon
-            icon="bookingHistory"
-            variant="ghost"
-            className="flex justify-start w-full"
-            to={PATHS.BOOKING_HISTORY}>
-            My Bookings
-          </LinkWithIcon>
+          <Link
+            to={PATHS.SETTINGS.BOOKING_HISTORY}
+            className="flex items-center justify-start w-full gap-2 px-2 py-1.5">
+            <Icon icon="bookingHistory" size={20} />
+            <span>My Bookings</span>
+          </Link>
         </DropdownMenuItem>
+
+        {isAdmin(user) && (
+          <DropdownMenuItem asChild>
+            <Link
+              to={PATHS.ADMIN.ROOT}
+              className="flex items-center justify-start w-full gap-2 px-2 py-1.5">
+              <Icon icon="dashboard" size={20} />
+              <span>Admin Dashboard</span>
+            </Link>
+          </DropdownMenuItem>
+        )}
 
         <DropdownMenuItem asChild>
           <Button

@@ -14,6 +14,9 @@ function SettingsSidebar() {
 
   const { logoutHandler, isLoading } = useLogoutHandler();
 
+  const avatarUrl =
+    user?.profilePicture || getDefaultProfile(user?.userName.charAt(0));
+
   return (
     <aside className="sticky w-full px-4 py-6 shadow-md rounded-xl top-6 basis-72 shrink-0 h-max">
       <div className="flex flex-col items-center gap-2">
@@ -21,7 +24,7 @@ function SettingsSidebar() {
           <Avatar className="cursor-pointer size-24">
             <AvatarImage
               loading="lazy"
-              src={getDefaultProfile(user?.name.charAt(0))}
+              src={avatarUrl}
               width={36}
               height={36}
             />

@@ -3,7 +3,7 @@ import Home from "./home";
 import SearchPage from "./search";
 import HotelDetails from "./hotel-details";
 import { SignInPage, SignUpPage } from "./auth";
-import { BrowserRouter, Route, Routes } from "react-router";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router";
 import PATHS from "@/config/path.config";
 import CheckoutPage from "./checkout";
 import {
@@ -20,6 +20,10 @@ import WithAdminProvider from "@/lib/providers/admin-context-provider";
 import AdminPage from "./admin";
 import Hotels from "./admin/hotels";
 import CreateHotel from "./admin/create-hotel";
+import AdminLayout from "@/components/layouts/admin/admin.layout";
+import Overview from "./admin/overview";
+import Bookings from "./admin/booking";
+import Rooms from "./admin/rooms";
 
 function Router() {
   return (
@@ -62,6 +66,28 @@ function Router() {
               <Route
                 path={PATHS.ADMIN.CREATE_HOTEL}
                 element={<CreateHotel />}
+              />
+            </Route>
+            
+            <Route path={PATHS.ADMIN.DASHBOARD.ROOT} element={<AdminLayout />}>
+              <Route
+                index
+                element={<Navigate to={PATHS.ADMIN.DASHBOARD.OVERVIEW} />}
+              />
+
+              <Route
+                path={PATHS.ADMIN.DASHBOARD.OVERVIEW}
+                element={<Overview />}
+              />
+
+              <Route
+                path={PATHS.ADMIN.DASHBOARD.BOOKINGS}
+                element={<Bookings />}
+              />
+
+              <Route
+                path={PATHS.ADMIN.DASHBOARD.ROOMS.ROOT}
+                element={<Rooms />}
               />
             </Route>
           </Route>

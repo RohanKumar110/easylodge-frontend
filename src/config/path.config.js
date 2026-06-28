@@ -21,7 +21,7 @@ const PATHS = {
     LIST_HOTELS: "hotels",
     CREATE_HOTEL: "hotels/create",
     DASHBOARD: {
-      ROOT: "hotels/:hotelId",
+      ROOT: "/admin/hotels/:hotelId",
       OVERVIEW: "overview",
       BOOKINGS: "bookings",
       EDIT_HOTEL: "edit",
