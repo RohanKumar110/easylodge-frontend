@@ -6,7 +6,7 @@ function AdminPage() {
   return (
     <>
       <Header showServiceList={false} />
-      <main>
+      <main className="py-5">
         <Outlet />
       </main>
     </>

@@ -29,6 +29,7 @@ const API_CONFIG = {
   },
   ADMIN: {
     GET_ADMIN_HOTELS: "/admin/hotels",
+    CREATE_NEW_HOTEL: "/admin/hotels",
   },
 };
 

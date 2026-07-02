@@ -34,6 +34,8 @@ import {
   Hotel,
   MoveRight,
   LayoutGrid,
+  ImagePlus,
+  Loader2,
 } from "lucide-react";
 
 export default {
@@ -130,4 +132,6 @@ export default {
   rightArrow: MoveRight,
   hotel: Hotel,
   dashboard: LayoutGrid,
+  addImage: ImagePlus,
+  spinner: Loader2,
 };
