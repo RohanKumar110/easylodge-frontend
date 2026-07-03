@@ -20,7 +20,7 @@ function WithAdminProvider() {
 
 function AdminContextProvider({ children }) {
   const { hotelId } = useParams();
-  const { data, isLoading, error } = useQuery(
+  const { data, isLoading, refetchQuery, error } = useQuery(
     API_CONFIG.ADMIN.GET_HOTEL_BY_ID(hotelId)
   );
 
@@ -29,7 +29,8 @@ function AdminContextProvider({ children }) {
   }
 
   return (
-    <AdminContext.Provider value={{ hotel: data, isLoading, error }}>
+    <AdminContext.Provider
+      value={{ hotel: data, isLoading, refetchQuery, error }}>
       {children}
     </AdminContext.Provider>
   );

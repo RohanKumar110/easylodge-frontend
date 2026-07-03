@@ -36,6 +36,7 @@ import {
   LayoutGrid,
   ImagePlus,
   Loader2,
+  ChevronLeft,
 } from "lucide-react";
 
 export default {
@@ -134,4 +135,5 @@ export default {
   dashboard: LayoutGrid,
   addImage: ImagePlus,
   spinner: Loader2,
+  leftArrow: ChevronLeft,
 };

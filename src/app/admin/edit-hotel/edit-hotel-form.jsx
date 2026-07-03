@@ -11,10 +11,11 @@ import { Input } from "@/components/ui/input";
 import { Button, ButtonWithIcon } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import TokenInput from "@/components/ui/token-input";
-import useCreateHotelForm from "./hooks/useCreateHotelForm";
+import useEditHotelForm from "./hooks/useEditHotelForm";
 
-function CreateHotelForm() {
-  const { form, isLoading, handleCreateHotelFormSubmit } = useCreateHotelForm();
+function EditHotelForm({ hotel }) {
+  const { form, isLoading, handleEditHotelFormSubmit } =
+    useEditHotelForm(hotel);
 
   function handleFiles(e, field) {
     const files = Array.from(e.target.files);
@@ -28,42 +29,40 @@ function CreateHotelForm() {
     <div>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleCreateHotelFormSubmit)}
-          className="space-y-6">
-          <div className="flex gap-6">
-            <FormField
-              control={form.control}
-              name="name"
-              render={({ field }) => (
-                <FormItem className={"flex-1"}>
-                  <FormLabel>Hotel Name</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="Grand Plaza Hotel" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="city"
-              render={({ field }) => (
-                <FormItem className={"flex-1"}>
-                  <FormLabel>City</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="New York" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          onSubmit={form.handleSubmit(handleEditHotelFormSubmit)}
+          className="max-w-142 space-y-6">
+          <FormField
+            control={form.control}
+            name="name"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Hotel Name</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="Grand Plaza Hotel" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="city"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>City</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="New York" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <FormField
             control={form.control}
             name="images"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex-1">
                 <FormLabel>Images</FormLabel>
                 <div className="flex flex-wrap gap-6 p-4 border rounded-md">
                   <FormControl>
@@ -104,7 +103,7 @@ function CreateHotelForm() {
             control={form.control}
             name="amenities"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex-1">
                 <FormLabel>Amenities</FormLabel>
                 <FormControl>
                   <TokenInput {...field} placeholder="Wifi, Pool, Parking..." />
@@ -114,71 +113,67 @@ function CreateHotelForm() {
             )}
           />
 
-          <div className="flex gap-6">
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Hotel Address</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="123 Main St, Suite 100" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          <FormField
+            control={form.control}
+            name="address"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Hotel Address</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="123 Main St, Suite 100" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-            <FormField
-              control={form.control}
-              name="coordinates"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Location</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="40.7128,-74.0060" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="coordinates"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Location</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="40.7128,-74.0060" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
-          <div className="flex gap-6">
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Contact Number</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="123-456-7890" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="email"
-              render={({ field }) => (
-                <FormItem className="flex-1">
-                  <FormLabel>Email</FormLabel>
-                  <FormControl>
-                    <Input {...field} placeholder="contact@hotel.com" />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          </div>
+          <FormField
+            control={form.control}
+            name="phone"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Contact Number</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="123-456-7890" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="email"
+            render={({ field }) => (
+              <FormItem className="flex-1">
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input {...field} placeholder="contact@hotel.com" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
 
           <ButtonWithIcon
             icon={"save"}
             className="px-8 h-11 cursor-pointer"
             isLoading={isLoading}
             disabled={isLoading}>
-            Create Hotel
+            Save Hotel
           </ButtonWithIcon>
         </form>
       </Form>
@@ -210,4 +205,4 @@ function HotelImage({ image, onRemove }) {
   );
 }
 
-export default CreateHotelForm;
+export default EditHotelForm;

@@ -1,7 +1,7 @@
 import React from "react";
 import CreateHotelForm from "./create-hotel-form";
 
-const CreateHotel = () => {
+function CreateHotel() {
   return (
     <div className="container py-4 space-y-8">
       <div className="flex flex-col gap-1">
@@ -13,6 +13,6 @@ const CreateHotel = () => {
       <CreateHotelForm />
     </div>
   );
-};
+}
 
 export default CreateHotel;

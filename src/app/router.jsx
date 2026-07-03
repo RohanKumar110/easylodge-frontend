@@ -24,6 +24,7 @@ import AdminLayout from "@/components/layouts/admin/admin.layout";
 import Overview from "./admin/overview";
 import Bookings from "./admin/booking";
 import Rooms from "./admin/rooms";
+import EditHotel from "./admin/edit-hotel";
 
 function Router() {
   return (
@@ -88,6 +89,11 @@ function Router() {
               <Route
                 path={PATHS.ADMIN.DASHBOARD.ROOMS.ROOT}
                 element={<Rooms />}
+              />
+
+              <Route
+                path={PATHS.ADMIN.DASHBOARD.EDIT_HOTEL}
+                element={<EditHotel />}
               />
             </Route>
           </Route>
