@@ -16,7 +16,7 @@ import Profile from "./settings/profile";
 import BookingHistory from "./settings/bookings";
 import TravellersManagement from "./settings/travellers";
 import RegularUserLayout from "@/components/layouts/regular.user.layout";
-import WithAdminProvider from "@/lib/providers/admin-context-provider";
+import { WithAdminProvider } from "@/lib/providers/admin-context-provider";
 import AdminPage from "./admin";
 import Hotels from "./admin/hotels";
 import CreateHotel from "./admin/create-hotel";
@@ -68,7 +68,7 @@ function Router() {
                 element={<CreateHotel />}
               />
             </Route>
-            
+
             <Route path={PATHS.ADMIN.DASHBOARD.ROOT} element={<AdminLayout />}>
               <Route
                 index

@@ -13,7 +13,7 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import Icon from "@/components/ui/icon";
-import { ADMIN_SIDEBAR } from "@/config/app.config";
+import { ADMIN_SIDEBAR } from "@/config/admin.config";
 
 const AdminSidebar = () => {
   const { hotelId } = useParams();
