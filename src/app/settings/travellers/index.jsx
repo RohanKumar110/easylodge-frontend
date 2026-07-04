@@ -3,12 +3,13 @@ import { Separator } from "@/components/ui/separator";
 import AddNewTraveller from "@/app/checkout/guests/add-new-traveller-dialog";
 import CoTravellerInfo from "./co-traveller-info";
 import { useTravellerContext } from "@/lib/providers/travellers-context-provider";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function TravellersManagement() {
   const { travellers, isLoading } = useTravellerContext();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

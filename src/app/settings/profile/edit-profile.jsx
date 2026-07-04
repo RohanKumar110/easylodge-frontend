@@ -14,6 +14,7 @@ import Icon from "@/components/ui/icon";
 import { Button } from "@/components/ui/button";
 import useProfileForm from "./hooks/useProfileForm";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function EditProfile() {
   const { form, updateProfileHandler, isLoading } = useProfileForm();
@@ -26,7 +27,7 @@ function EditProfile() {
   }
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

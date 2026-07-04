@@ -3,6 +3,7 @@ import useQuery from "@/lib/hooks/useQuery";
 import React from "react";
 import EmptyHotels from "./empty-hotels";
 import { LinkWithIcon } from "@/components/ui/link-with-icon";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function Hotels() {
   const { data, isLoading, error } = useQuery(
@@ -10,7 +11,7 @@ function Hotels() {
   );
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

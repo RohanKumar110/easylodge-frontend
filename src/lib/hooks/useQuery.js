@@ -10,6 +10,7 @@ function useQuery(url, options = {}) {
   });
 
   async function fetchData() {
+    
     setQueryState((prev) => ({
       ...prev,
       isLoading: true,

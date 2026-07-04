@@ -4,13 +4,14 @@ import { Link, useParams } from "react-router";
 import { useAdminContext } from "@/lib/providers/admin-context-provider";
 import { LinkWithIcon } from "@/components/ui/link-with-icon";
 import Icon from "@/components/ui/icon";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function EditHotel() {
   const { hotelId } = useParams();
   const { hotel, isLoading } = useAdminContext();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

@@ -6,12 +6,13 @@ import HotelPolicy from "./hotel-policy";
 import HotelCheckoutCard from "./hotel-checkout-card";
 import { HOTEL_INFO } from "./hotel-details-dummy-data";
 import useFetchHotelDetails from "./hooks/useFetchHotelDetails";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function HotelDetails() {
   const { data, isLoading, error } = useFetchHotelDetails();
 
   if (isLoading || !data) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   if (error) {

@@ -3,12 +3,13 @@ import React from "react";
 import HotelMetaInfo from "./hotel-meta-info";
 import OverviewFilters from "./overview-filters";
 import InsightSection from "./insight-section";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function Overview() {
   const { hotel, isLoading } = useAdminContext();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

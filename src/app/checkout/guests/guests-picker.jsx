@@ -18,6 +18,7 @@ import {
   AlertDialogFooter,
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function GuestsPicker({
   bookingId,
@@ -39,7 +40,7 @@ function GuestsPicker({
   );
 
   if (isTravellersLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   function handleAddGuestClick(data) {

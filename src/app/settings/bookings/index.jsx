@@ -2,12 +2,13 @@ import React from "react";
 import BookingCard from "./booking-card";
 import useGetBookingHistory from "./hooks/useGetBookingHistory";
 import { Separator } from "@/components/ui/separator";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function BookingHistory() {
   const { data, error, isLoading } = useGetBookingHistory();
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    <LoadingSpinner />;
   }
 
   if (!isLoading && error) {

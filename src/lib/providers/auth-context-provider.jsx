@@ -6,6 +6,7 @@ import { getEncodedRedirecturl } from "../utils";
 import { getLocalStorageItem } from "../store.manager";
 import { AUTH_TOKEN_KEY } from "@/config/storage.config";
 import PATHS from "@/config/path.config";
+import { AppLoader } from "@/components/ui/loader";
 
 const AuthContext = createContext(null);
 
@@ -69,7 +70,7 @@ function AuthContextProvider({ children }) {
         authChecked,
         refetchCurrentUser,
       }}>
-      {isLoading ? <p>Loading...</p> : children}
+      {(isLoading && !authChecked) ? <AppLoader /> : children}
     </AuthContext.Provider>
   );
 }

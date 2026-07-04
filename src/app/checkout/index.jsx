@@ -3,6 +3,7 @@ import useInitCheckout from "./hooks/useInitCheckout";
 import { Separator } from "@/components/ui/separator";
 import BookingDetails from "./booking-details";
 import InitiatePaymentButton from "./init-payment-button";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 function CheckoutPage() {
   const { data, isLoading, error, initCheckout } = useInitCheckout();
@@ -16,7 +17,7 @@ function CheckoutPage() {
   }
 
   if (isLoading || !data) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (

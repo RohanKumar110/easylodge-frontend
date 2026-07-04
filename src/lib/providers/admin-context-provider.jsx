@@ -4,6 +4,7 @@ import { Navigate, Outlet, useParams } from "react-router";
 import { isAdmin } from "../utils";
 import useQuery from "../hooks/useQuery";
 import API_CONFIG from "@/config/api.config";
+import { LoadingSpinner } from "@/components/ui/loader";
 
 const AdminContext = createContext();
 
@@ -25,7 +26,7 @@ function AdminContextProvider({ children }) {
   );
 
   if (isLoading) {
-    return <p>Loading...</p>;
+    return <LoadingSpinner />;
   }
 
   return (
