@@ -50,6 +50,7 @@ function Hotels() {
     </div>
   );
 }
+
 function HotelCard({ id, name, active, images, address }) {
   return (
     <article className="overflow-hidden border rounded-xl">

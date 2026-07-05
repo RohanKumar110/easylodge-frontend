@@ -12,6 +12,7 @@ import { Button, ButtonWithIcon } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import TokenInput from "@/components/ui/token-input";
 import useCreateHotelForm from "./hooks/useCreateHotelForm";
+import HotelImage from "@/components/hotel-image";
 
 function CreateHotelForm() {
   const { form, isLoading, handleCreateHotelFormSubmit } = useCreateHotelForm();
@@ -182,30 +183,6 @@ function CreateHotelForm() {
           </ButtonWithIcon>
         </form>
       </Form>
-    </div>
-  );
-}
-
-function HotelImage({ image, onRemove }) {
-  return (
-    <div className="relative">
-      <img
-        src={image}
-        alt="Hotel image"
-        width={96}
-        height={96}
-        className="object-cover size-24 rounded-md"
-      />
-      <Button
-        size={"icon"}
-        type="button"
-        variant={"destructive"}
-        onClick={onRemove}
-        className={
-          "absolute size-6 rounded-full -top-2 -right-2 cursor-pointer"
-        }>
-        <Icon icon={"close"} size="14" />
-      </Button>
     </div>
   );
 }

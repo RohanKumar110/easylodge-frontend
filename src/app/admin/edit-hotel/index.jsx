@@ -1,10 +1,9 @@
 import React from "react";
 import EditHotelForm from "./edit-hotel-form";
-import { Link, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useAdminContext } from "@/lib/providers/admin-context-provider";
-import { LinkWithIcon } from "@/components/ui/link-with-icon";
-import Icon from "@/components/ui/icon";
 import { LoadingSpinner } from "@/components/ui/loader";
+import BackNavigation from "@/components/back-navigation";
 
 function EditHotel() {
   const { hotelId } = useParams();
@@ -15,19 +14,20 @@ function EditHotel() {
   }
 
   return (
-    <div className="container py-4 space-y-8">
-      <div className="flex flex-col gap-1">
-        <Link
-          to={`/admin/hotels/${hotelId}/overview`}
-          className="flex items-center my-3 text-muted-foreground p-0 hover:no-underline hover:text-foreground">
-          <Icon icon="leftArrow" className="p-0 inline-block" size={18} />
-          Back to Hotel
-        </Link>
-        <h1 className="text-lg font-semibold">Hotel Information</h1>
-        <p className="text-sm text-muted-foreground">
-          Modify hotel information and review it
-        </p>
+    <div className="container p-4 max-w-384 space-y-8">
+      <div className="space-y-4">
+        <BackNavigation
+          text="Back to hotel"
+          href={`/admin/hotels/${hotelId}/overview`}
+        />
+        <div className="flex flex-col gap-1">
+          <h1 className="text-lg font-semibold">Hotel Information</h1>
+          <p className="text-sm text-muted-foreground">
+            Modify hotel information and review it
+          </p>
+        </div>
       </div>
+
       <EditHotelForm hotel={hotel} />
     </div>
   );

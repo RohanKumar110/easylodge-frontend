@@ -34,6 +34,8 @@ const API_CONFIG = {
     GET_HOTEL_REPORTS_BY_ID: (hotelId) => `/admin/hotels/${hotelId}/reports`,
     EDIT_HOTEL_BY_ID: (hotelId) => `/admin/hotels/${hotelId}`,
     DELETE_HOTEL_BY_ID: (hotelId) => `/admin/hotels/${hotelId}`,
+    GET_ADMIN_HOTEL_ROOMS_BY_HOTEL_ID: (hotelId) =>
+      `/admin/hotels/${hotelId}/rooms`,
   },
 };
 
