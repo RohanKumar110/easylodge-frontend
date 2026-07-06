@@ -38,6 +38,11 @@ const API_CONFIG = {
       `/admin/hotels/${hotelId}/rooms`,
 
     CREATE_NEW_ROOM: (hotelId) => `/admin/hotels/${hotelId}/rooms`,
+    GET_ROOM_BY_ID: (hotelId, roomId) =>
+      `/admin/hotels/${hotelId}/rooms/${roomId}`,
+
+    EDIT_ROOM_BY_ID: (hotelId, roomId) =>
+      `/admin/hotels/${hotelId}/rooms/${roomId}`,
   },
 };
 

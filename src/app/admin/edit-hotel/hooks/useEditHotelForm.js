@@ -9,7 +9,7 @@ import { toast } from "sonner";
 
 function useEditHotelForm(hotel) {
   const navigate = useNavigate();
-  const { refetchQuery } = useAdminContext();
+  const { refetch } = useAdminContext();
 
   const { mutate, isLoading } = useMutation(
     API_CONFIG.ADMIN.EDIT_HOTEL_BY_ID(hotel.id),
@@ -34,7 +34,7 @@ function useEditHotelForm(hotel) {
   async function handleEditHotelFormSubmit(data) {
     await mutate(data, {
       onSuccess: async (res) => {
-        await refetchQuery();
+        await refetch();
         toast("Hotel Updated Successfully", {
           type: "success",
         });
