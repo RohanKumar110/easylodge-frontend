@@ -1,4 +1,4 @@
-import React from "react";
+import { ButtonWithIcon } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -8,15 +8,13 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button, ButtonWithIcon } from "@/components/ui/button";
-import Icon from "@/components/ui/icon";
 import TokenInput from "@/components/ui/token-input";
-import useEditHotelForm from "./hooks/useEditHotelForm";
-import HotelImage from "@/components/ImageHolder";
+import Icon from "@/components/ui/icon";
+import useCreateRoomForm from "./hooks/useCreateRoomForm";
+import ImageHolder from "@/components/ImageHolder";
 
-function EditHotelForm({ hotel }) {
-  const { form, isLoading, handleEditHotelFormSubmit } =
-    useEditHotelForm(hotel);
+function CreateRoomForm() {
+  const { form, handleCreateRoomFormSubmit, isLoading } = useCreateRoomForm();
 
   function handleFiles(e, field) {
     const files = Array.from(e.target.files);
@@ -27,19 +25,19 @@ function EditHotelForm({ hotel }) {
   }
 
   return (
-    <div>
+    <section>
       <Form {...form}>
         <form
-          onSubmit={form.handleSubmit(handleEditHotelFormSubmit)}
-          className="max-w-142 space-y-6">
+          onSubmit={form.handleSubmit(handleCreateRoomFormSubmit)}
+          className="space-y-6 max-w-142">
           <FormField
             control={form.control}
-            name="name"
+            name="type"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Hotel Name</FormLabel>
+                <FormLabel>Room Type</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="Grand Plaza Hotel" />
+                  <Input {...field} placeholder="Deluxe King Room" />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -47,12 +45,18 @@ function EditHotelForm({ hotel }) {
           />
           <FormField
             control={form.control}
-            name="city"
+            name="basePrice"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>City</FormLabel>
+                <FormLabel>Base Price</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="New York" />
+                  <Input
+                    {...field}
+                    placeholder="150"
+                    onChange={(e) =>
+                      field.onChange(e.target.value.replace(/\D+/g, ""))
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -63,7 +67,7 @@ function EditHotelForm({ hotel }) {
             control={form.control}
             name="images"
             render={({ field }) => (
-              <FormItem className="flex-1">
+              <FormItem>
                 <FormLabel>Images</FormLabel>
                 <div className="flex flex-wrap gap-6 p-4 border rounded-md">
                   <FormControl>
@@ -76,7 +80,7 @@ function EditHotelForm({ hotel }) {
                     />
                   </FormControl>
                   {field.value?.map((image, index) => (
-                    <HotelImage
+                    <ImageHolder
                       key={index}
                       image={image}
                       onRemove={() =>
@@ -104,7 +108,7 @@ function EditHotelForm({ hotel }) {
             control={form.control}
             name="amenities"
             render={({ field }) => (
-              <FormItem className="flex-1">
+              <FormItem>
                 <FormLabel>Amenities</FormLabel>
                 <FormControl>
                   <TokenInput {...field} placeholder="Wifi, Pool, Parking..." />
@@ -116,40 +120,18 @@ function EditHotelForm({ hotel }) {
 
           <FormField
             control={form.control}
-            name="address"
+            name="totalRoomsCount"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Hotel Address</FormLabel>
+                <FormLabel>Total Room Count</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="123 Main St, Suite 100" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="coordinates"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>Location</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="40.7128,-74.0060" />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="phone"
-            render={({ field }) => (
-              <FormItem className="flex-1">
-                <FormLabel>Contact Number</FormLabel>
-                <FormControl>
-                  <Input {...field} placeholder="123-456-7890" />
+                  <Input
+                    {...field}
+                    placeholder="10"
+                    onChange={(e) =>
+                      field.onChange(e.target.value.replace(/\D+/g, ""))
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -157,29 +139,34 @@ function EditHotelForm({ hotel }) {
           />
           <FormField
             control={form.control}
-            name="email"
+            name="capacity"
             render={({ field }) => (
               <FormItem className="flex-1">
-                <FormLabel>Email</FormLabel>
+                <FormLabel>Total Capacity</FormLabel>
                 <FormControl>
-                  <Input {...field} placeholder="contact@hotel.com" />
+                  <Input
+                    {...field}
+                    placeholder="2"
+                    onChange={(e) =>
+                      field.onChange(e.target.value.replace(/\D+/g, ""))
+                    }
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
-
           <ButtonWithIcon
-            icon={"save"}
+            icon="save"
             className="px-8 h-11 cursor-pointer"
-            isLoading={isLoading}
-            disabled={isLoading}>
-            Save Hotel
+            disabled={isLoading}
+            isLoading={isLoading}>
+            Create New Room
           </ButtonWithIcon>
         </form>
       </Form>
-    </div>
+    </section>
   );
 }
 
-export default EditHotelForm;
+export default CreateRoomForm;

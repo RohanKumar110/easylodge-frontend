@@ -25,6 +25,7 @@ import Overview from "./admin/overview";
 import Bookings from "./admin/booking";
 import Rooms from "./admin/rooms";
 import EditHotel from "./admin/edit-hotel";
+import CreateRoom from "./admin/create-room";
 
 function Router() {
   return (
@@ -82,6 +83,11 @@ function Router() {
               />
 
               <Route
+                path={PATHS.ADMIN.DASHBOARD.EDIT_HOTEL}
+                element={<EditHotel />}
+              />
+
+              <Route
                 path={PATHS.ADMIN.DASHBOARD.BOOKINGS}
                 element={<Bookings />}
               />
@@ -92,8 +98,8 @@ function Router() {
               />
 
               <Route
-                path={PATHS.ADMIN.DASHBOARD.EDIT_HOTEL}
-                element={<EditHotel />}
+                path={PATHS.ADMIN.DASHBOARD.ROOMS.CREATE}
+                element={<CreateRoom />}
               />
             </Route>
           </Route>

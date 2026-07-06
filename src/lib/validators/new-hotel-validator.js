@@ -16,7 +16,7 @@ export const newHotelSchema = z.object({
   amenities: z
     .array(z.string())
     .min(1, "Amenities are required")
-    .max(10, "You can upload up to 20 amenities"),
+    .max(10, "You can upload up to 10 amenities"),
 
   email: z.string().min(1, "Email is required").email("Invalid Email"),
 

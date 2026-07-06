@@ -1,7 +1,7 @@
-import Icons from "@/lib/icons";
 import { Button } from "./ui/button";
+import Icon from "./ui/icon";
 
-function HotelImage({ image, onRemove }) {
+function ImageHolder({ image, onRemove }) {
   return (
     <div className="relative">
       <img
@@ -19,10 +19,10 @@ function HotelImage({ image, onRemove }) {
         className={
           "absolute size-6 rounded-full -top-2 -right-2 cursor-pointer"
         }>
-        <Icons icon={"close"} size="14" />
+        <Icon icon={"close"} size="14" />
       </Button>
     </div>
   );
 }
 
-export default HotelImage;
+export default ImageHolder;

@@ -6,7 +6,7 @@ function BackNavigation({ text = "Back", href }) {
     <LinkWithIcon
       to={href}
       size="sm"
-      className="gap-0.5 text-muted-foreground p-0 hover:no-underline hover:text-foreground"
+      className="gap-0.5 text-muted-foreground p-0 hover:no-underline hover:text-foreground pl-0!"
       variant="link"
       icon="leftArrow"
       iconProps={{ size: 18 }}>

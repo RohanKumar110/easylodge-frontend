@@ -36,6 +36,8 @@ const API_CONFIG = {
     DELETE_HOTEL_BY_ID: (hotelId) => `/admin/hotels/${hotelId}`,
     GET_ADMIN_HOTEL_ROOMS_BY_HOTEL_ID: (hotelId) =>
       `/admin/hotels/${hotelId}/rooms`,
+
+    CREATE_NEW_ROOM: (hotelId) => `/admin/hotels/${hotelId}/rooms`,
   },
 };
 

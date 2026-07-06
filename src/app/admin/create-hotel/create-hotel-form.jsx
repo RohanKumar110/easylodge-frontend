@@ -8,11 +8,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button, ButtonWithIcon } from "@/components/ui/button";
+import { ButtonWithIcon } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import TokenInput from "@/components/ui/token-input";
 import useCreateHotelForm from "./hooks/useCreateHotelForm";
-import HotelImage from "@/components/hotel-image";
+import ImageHolder from "@/components/ImageHolder";
 
 function CreateHotelForm() {
   const { form, isLoading, handleCreateHotelFormSubmit } = useCreateHotelForm();
@@ -77,7 +77,7 @@ function CreateHotelForm() {
                     />
                   </FormControl>
                   {field.value?.map((image, index) => (
-                    <HotelImage
+                    <ImageHolder
                       key={index}
                       image={image}
                       onRemove={() =>
