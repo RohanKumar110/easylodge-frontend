@@ -10,7 +10,7 @@ function HotelRoomPicker({ rooms }) {
   const selectedRoomId = searchParams.get(SEARCH_PARAMS_KEYS.SELECTED_ROOM);
 
   useEffect(() => {
-    if (!rooms.find((room) => room.id === selectedRoomId)) {
+    if (!rooms.find((room) => room?.id === selectedRoomId)) {
       searchParams.set(SEARCH_PARAMS_KEYS.SELECTED_ROOM, rooms[0].id);
       setSearchParams(searchParams, { replace: true });
     }
@@ -22,9 +22,9 @@ function HotelRoomPicker({ rooms }) {
       <div className="space-y-4">
         {rooms.map((room) => (
           <Room
-            key={room.id}
+            key={room?.id}
             room={room}
-            isSelected={selectedRoomId === room.id}
+            isSelected={selectedRoomId === room?.id}
           />
         ))}
       </div>
@@ -36,7 +36,7 @@ function Room({ room, isSelected }) {
   const [searchParams, setSearchParams] = useSearchParams();
 
   function handleRoomSelectClick() {
-    searchParams.set(SEARCH_PARAMS_KEYS.SELECTED_ROOM, room.id);
+    searchParams.set(SEARCH_PARAMS_KEYS.SELECTED_ROOM, room?.id);
     setSearchParams(searchParams, { replace: true });
   }
 
@@ -58,7 +58,7 @@ function Room({ room, isSelected }) {
       <div className="flex justify-between items-center border border-border p-4">
         <div className="flex-1 space-y-4">
           <div className="flex gap-1 items-center">
-            <h3 className="text-lg font-semibold">{room.type}</h3>
+            <h3 className="text-lg font-semibold">{room?.type}</h3>
             {isSelected && (
               <Icon
                 icon="circleCheck"
@@ -69,7 +69,7 @@ function Room({ room, isSelected }) {
           </div>
           <div>
             <ul className="flex flex-wrap gap-2">
-              {room.amenities.map((amenity, index) => (
+              {room?.amenities.map((amenity, index) => (
                 <li key={index} className="flex gap-2 items-center min-w-45">
                   <Icon icon="check" size="18" className="text-green-600" />
                   <span className="text-sm font-medium text-muted-foreground">
@@ -82,8 +82,8 @@ function Room({ room, isSelected }) {
         </div>
         <div className="w-45 h-30">
           <img
-            src={room.images[0]}
-            alt={room.images[0]}
+            src={room?.images[0]}
+            alt={room?.images[0]}
             className="object-cover size-full rounded-lg"
           />
         </div>
@@ -91,8 +91,8 @@ function Room({ room, isSelected }) {
 
       <div className="flex border-x border-b rounded-b-lg p-4">
         <div className="flex-1 flex gap-2 items-center">
-          <span className="text-lg font-bold">{`$${room.price.toLocaleString()}`}</span>
-          <span className="text-sm text-muted-foreground line-through">{`$${(room.price * 1.24).toLocaleString()}`}</span>
+          <span className="text-lg font-bold">{`$${room?.basePrice?.toLocaleString()}`}</span>
+          <span className="text-sm text-muted-foreground line-through">{`$${(room?.basePrice * 1.24).toLocaleString()}`}</span>
         </div>
         <Button
           disabled={isSelected}

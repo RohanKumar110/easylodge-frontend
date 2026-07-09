@@ -25,7 +25,7 @@ function useFetchSelectedRoom(rooms = []) {
     1
   );
 
-  const nightlyPrice = selectedRoom?.price ?? 0;
+  const nightlyPrice = selectedRoom?.basePrice ?? 0;
   const discountPercentage = selectedRoom?.discountPercentage ?? 25;
 
   const totalPrice = nightlyPrice * nights * roomsCount;

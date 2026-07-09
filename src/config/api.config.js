@@ -43,6 +43,9 @@ const API_CONFIG = {
 
     EDIT_ROOM_BY_ID: (hotelId, roomId) =>
       `/admin/hotels/${hotelId}/rooms/${roomId}`,
+
+    GET_ALL_BOOKINGS_BY_HOTEL_ID: (hotelId) =>
+      `/admin/hotels/${hotelId}/bookings`,
   },
 };
 
