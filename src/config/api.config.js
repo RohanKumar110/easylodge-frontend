@@ -46,6 +46,8 @@ const API_CONFIG = {
 
     GET_ALL_BOOKINGS_BY_HOTEL_ID: (hotelId) =>
       `/admin/hotels/${hotelId}/bookings`,
+
+    EDIT_INVENTORY_BY_ROOM_ID: (roomId) => `/admin/inventory/rooms/${roomId}`,
   },
 };
 

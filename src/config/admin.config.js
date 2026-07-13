@@ -88,31 +88,36 @@ export const TOP_BOOKING_TABLE_HEADERS = [
 export const ROOM_INVENTORY_TABLE_HEADERS = [
   {
     id: 0,
+    label: "S.NO",
+    className: "w-[12%]",
+  },
+  {
+    id: 1,
     label: "Date",
     className: "w-[120px]",
   },
   {
-    id: 1,
+    id: 2,
     label: "Booking Count",
     className: "w-[50px]",
   },
   {
-    id: 2,
+    id: 3,
     label: "Reserved Count",
     className: "w-[50px]",
   },
   {
-    id: 3,
+    id: 4,
     label: "Surge Count",
     className: "w-[50px]",
   },
   {
-    id: 4,
+    id: 5,
     label: "Amount",
     className: "w-[12%]",
   },
   {
-    id: 5,
+    id: 6,
     label: "Status",
     className: "w-[12%]",
   },

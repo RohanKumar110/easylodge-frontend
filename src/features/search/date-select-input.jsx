@@ -6,10 +6,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { cn } from "@/lib/utils";
 import dayjs from "dayjs";
 import React from "react";
 
-function DateSelectInput({ form }) {
+function DateSelectInput({ form, className }) {
   return (
     <Popover>
       <FormField
@@ -18,7 +19,11 @@ function DateSelectInput({ form }) {
         render={({ field }) => (
           <>
             <PopoverTrigger asChild>
-              <FormItem className="h-12 px-4 py-2 rounded bg-background flex-auto">
+              <FormItem
+                className={cn(
+                  "h-12 px-4 py-2 rounded bg-background flex-auto",
+                  className
+                )}>
                 <div
                   role="button"
                   className="flex flex-auto items-center w-full h-full cursor-pointer">
