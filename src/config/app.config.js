@@ -173,6 +173,7 @@ export const SEARCH_PARAMS_KEYS = {
   SELECTED_ROOM: "selectedRcid",
   SORTBY: "sort",
   PAGE: "pageNo",
+  PAGE_SIZE: "pageSize",
   STAR_CATEGORY: "starCategory",
   PRICE_RANGE: "priceRange",
   NEXT_REDIRECT: "next",

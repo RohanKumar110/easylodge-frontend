@@ -7,6 +7,8 @@ import { useParams } from "react-router";
 import RoomCard from "../rooms/room-card";
 import UpdateInventoryForm from "./update-inventory-form";
 import InventoryTable from "./inventory-table";
+import useFetchInventory from "./hooks/useFetchInventory";
+import API_CONFIG from "@/config/api.config";
 
 function Inventory() {
   const { hotelId, roomId } = useParams();
@@ -15,21 +17,10 @@ function Inventory() {
     data: room,
     isLoading: roomLoading,
     error: roomError,
-  } = useQuery(`/admin/hotels/${hotelId}/rooms/${roomId}`);
+  } = useQuery(API_CONFIG.ADMIN.GET_ROOM_BY_ID(hotelId, roomId));
 
-  const startDate = dayjs().format("YYYY-MM-DD");
-  const endDate = dayjs().add(1, "month").format("YYYY-MM-DD");
-
-  const {
-    data: inventoriesData,
-    isLoading: inventoryLoading,
-    refetchQuery: refetchInventories,
-  } = useQuery(`/admin/inventory/rooms/${roomId}`, {
-    params: {
-      startDate,
-      endDate,
-    },
-  });
+  const { inventoriesData, inventoryLoading, refetchInventories } =
+    useFetchInventory(roomId);
 
   if (roomLoading) {
     return <LoadingSpinner containerClassName="min-h-[calc(100vh-56px)]" />;
@@ -55,6 +46,8 @@ function Inventory() {
         <RoomCard showRoomSettings={false} {...room} />
         <UpdateInventoryForm refetchInventories={refetchInventories} />
         <InventoryTable
+          totalItems={inventoriesData?.totalItems}
+          limit={inventoriesData?.pageSize}
           inventories={inventoriesData?.content}
           inventoryLoading={inventoryLoading}
         />

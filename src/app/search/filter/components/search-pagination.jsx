@@ -9,6 +9,7 @@ import useSearchPagination from "../hooks/useSearchPagination";
 import { cn } from "@/lib/utils";
 
 function SearchPagination({ totalItems, className, limit }) {
+  
   const { currentPage, onPageChange, paginationConfig } = useSearchPagination(
     totalItems,
     limit

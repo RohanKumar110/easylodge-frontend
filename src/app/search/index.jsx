@@ -39,10 +39,3 @@ function SearchPage() {
 }
 
 export default SearchPage;
-
-// city: "Miami",
-// startDate: "2025-07-20",
-// endDate: "2025-07-22",
-// roomsCount: 1,
-// pageNo: 0,
-// pageSize: 10,
