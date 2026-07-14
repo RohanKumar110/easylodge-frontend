@@ -23,8 +23,33 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router";
 import { toast } from "sonner";
 import useMutation from "@/lib/hooks/useMutation";
+import { Switch } from "@/components/ui/switch";
+import { Toaster } from "@/components/ui/sonner";
 
-function HotelMetaInfo({ name, address, image, active }) {
+function HotelMetaInfo({ id, name, address, image, active: initialActive }) {
+  const [active, setActive] = useState(initialActive);
+
+  const { mutate, isLoading } = useMutation(
+    API_CONFIG.ADMIN.UPDATE_HOTEL_STATUS_BY_HOTEL_ID(id),
+    "PATCH"
+  );
+
+  function handleActiveToggle(checked) {
+    mutate(null, {
+      params: { active: checked },
+      onSuccess: () => {
+        setActive(checked);
+        toast("Hotel Status Updated Successfully", {
+          type: "success",
+        });
+      },
+      onError: (error) => {
+        setActive(!checked);
+        toast(error.message || ERROR_FALLBACK.TITLE, { type: "error" });
+      },
+    });
+  }
+
   return (
     <article className="flex items-center justify-between p-4 border rounded-md">
       <div className="flex gap-4">
@@ -42,7 +67,15 @@ function HotelMetaInfo({ name, address, image, active }) {
           </div>
         </div>
       </div>
-      <HotelSettings />
+      <div className="flex flex-col gap-3">
+        <Switch
+          checked={active}
+          disabled={isLoading}
+          className={"cursor-pointer"}
+          onCheckedChange={handleActiveToggle}
+        />
+        <HotelSettings />
+      </div>
     </article>
   );
 }

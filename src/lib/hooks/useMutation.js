@@ -20,6 +20,7 @@ function useMutation(url, method) {
         url: url,
         method: method,
         data: payload,
+        params: callback?.params, // ← new: forwards query params if provided
       });
 
       setMutateState((prev) => ({ ...prev, data: res.data }));

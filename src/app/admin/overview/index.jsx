@@ -15,6 +15,7 @@ function Overview() {
   return (
     <div className="container p-4 max-w-384 space-y-8">
       <HotelMetaInfo
+        id={hotel.id}
         name={hotel.name}
         address={hotel.address}
         image={hotel.images[0]}
