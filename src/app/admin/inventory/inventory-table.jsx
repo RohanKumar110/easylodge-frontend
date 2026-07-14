@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 import SearchPagination from "@/app/search/filter/components/search-pagination";
 import { useSearchParams } from "react-router";
 import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
+import InventoryDateFilter from "./inventory-date-filter";
 
 function InventoryTable({
   inventories = [],
@@ -29,68 +30,74 @@ function InventoryTable({
 
   return (
     <>
-      <div className="overflow-hidden border rounded-md mb-3">
-        <Table>
-          <TableHeader>
-            <TableRow>
-              {ROOM_INVENTORY_TABLE_HEADERS.map((header) => (
-                <TableCell key={header.id} className={header.className}>
-                  {header.label}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHeader>
-
-          <TableBody>
-            {inventoryLoading && (
-              <>
-                <InventoryTableLoadingSkeleton />
-                <InventoryTableLoadingSkeleton />
-                <InventoryTableLoadingSkeleton />
-                <InventoryTableLoadingSkeleton />
-              </>
-            )}
-
-            {!inventoryLoading && inventories.length === 0 && (
-              <TableRow className="pointer-events-none">
-                <TableCell
-                  colSpan={ROOM_INVENTORY_TABLE_HEADERS.length}
-                  className="h-32 text-center">
-                  No inventory have been made yet.
-                </TableCell>
-              </TableRow>
-            )}
-
-            {!inventoryLoading &&
-              inventories.map((inventory, i) => (
-                <TableRow key={inventory.id}>
-                  <TableCell>{pageNo * limit + (i + 1)}</TableCell>
-                  <TableCell>
-                    {dayjs(inventory.inventoryDate).format("DD MMM YYYY")}
+      <div>
+        <h1 className="text-lg text-center font-semibold">Inventories</h1>
+        <InventoryDateFilter />
+        <div className="overflow-hidden border rounded-md mb-3">
+          <Table>
+            <TableHeader>
+              <TableRow>
+                {ROOM_INVENTORY_TABLE_HEADERS.map((header) => (
+                  <TableCell key={header.id} className={header.className}>
+                    {header.label}
                   </TableCell>
-                  <TableCell>{inventory.bookedCount}</TableCell>
-                  <TableCell>{inventory.reservedCount}</TableCell>
-                  <TableCell>{inventory.surgeFactor}</TableCell>
-                  <TableCell className="font-mono">{inventory.price}</TableCell>
-                  <TableCell>
-                    <div
-                      className={cn(
-                        "flex items-center gap-1 px-2 py-1 font-medium capitalize rounded-md w-max",
-                        INVENTORY_ROOM_STATUS[
-                          inventory.closed ? "inactive" : "active"
-                        ].className
-                      )}>
-                      {
-                        INVENTORY_ROOM_STATUS[
-                          inventory.closed ? "inactive" : "active"
-                        ].text
-                      }
-                    </div>
+                ))}
+              </TableRow>
+            </TableHeader>
+
+            <TableBody>
+              {inventoryLoading && (
+                <>
+                  <InventoryTableLoadingSkeleton />
+                  <InventoryTableLoadingSkeleton />
+                  <InventoryTableLoadingSkeleton />
+                  <InventoryTableLoadingSkeleton />
+                </>
+              )}
+
+              {!inventoryLoading && inventories.length === 0 && (
+                <TableRow className="pointer-events-none">
+                  <TableCell
+                    colSpan={ROOM_INVENTORY_TABLE_HEADERS.length}
+                    className="h-32 text-center">
+                    No inventory have been made yet.
                   </TableCell>
                 </TableRow>
-              ))}
-          </TableBody>
-        </Table>
+              )}
+
+              {!inventoryLoading &&
+                inventories.map((inventory, i) => (
+                  <TableRow key={inventory.id}>
+                    <TableCell>{pageNo * limit + (i + 1)}</TableCell>
+                    <TableCell>
+                      {dayjs(inventory.inventoryDate).format("DD MMM YYYY")}
+                    </TableCell>
+                    <TableCell>{inventory.bookedCount}</TableCell>
+                    <TableCell>{inventory.reservedCount}</TableCell>
+                    <TableCell>{inventory.surgeFactor}</TableCell>
+                    <TableCell className="font-mono">
+                      {inventory.price}
+                    </TableCell>
+                    <TableCell>
+                      <div
+                        className={cn(
+                          "flex items-center gap-1 px-2 py-1 font-medium capitalize rounded-md w-max",
+                          INVENTORY_ROOM_STATUS[
+                            inventory.closed ? "inactive" : "active"
+                          ].className
+                        )}>
+                        {
+                          INVENTORY_ROOM_STATUS[
+                            inventory.closed ? "inactive" : "active"
+                          ].text
+                        }
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+            </TableBody>
+          </Table>
+        </div>
       </div>
       <div className="my-4 flex justify-center items-center">
         {inventories.length > 0 && (

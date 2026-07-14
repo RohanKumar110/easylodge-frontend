@@ -19,10 +19,10 @@ function useFetchInventory(roomId) {
   } = useQuery(API_CONFIG.ADMIN.GET_INVENTORY_BY_ROOM_ID(roomId), {
     params: {
       startDate: checkIn
-        ? dayjs(checkIn).toDate()
+        ? dayjs(checkIn).format("YYYY-MM-DD")
         : dayjs().format("YYYY-MM-DD"),
       endDate: checkOut
-        ? dayjs(checkOut).toDate()
+        ? dayjs(checkOut).format("YYYY-MM-DD")
         : dayjs().add(1, "month").format("YYYY-MM-DD"),
       pageNo: Math.max(
         0,

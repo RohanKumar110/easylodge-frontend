@@ -57,7 +57,7 @@ function DateSelectInput({ form, className }) {
               <Calendar
                 required
                 mode="range"
-                min={2}
+                min={1}
                 numberOfMonths={2}
                 selected={field.value}
                 fromMonth={new Date()}

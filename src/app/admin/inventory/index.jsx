@@ -1,7 +1,6 @@
 import BackNavigation from "@/components/back-navigation";
 import { LoadingSpinner } from "@/components/ui/loader";
 import useQuery from "@/lib/hooks/useQuery";
-import dayjs from "dayjs";
 import React from "react";
 import { useParams } from "react-router";
 import RoomCard from "../rooms/room-card";
@@ -25,9 +24,6 @@ function Inventory() {
   if (roomLoading) {
     return <LoadingSpinner containerClassName="min-h-[calc(100vh-56px)]" />;
   }
-
-  console.log("inventoriesData");
-  console.log(inventoriesData);
 
   return (
     <div className="container p-4 max-w-384 space-y-8">
