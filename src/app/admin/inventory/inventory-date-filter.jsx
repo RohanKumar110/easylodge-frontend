@@ -5,6 +5,7 @@ import { SEARCH_PARAMS_KEYS } from "@/config/app.config";
 import { useForm } from "react-hook-form";
 import { useSearchParams } from "react-router";
 import dayjs from "dayjs";
+import { toast } from "sonner";
 
 function InventoryDateFilter() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -26,18 +27,28 @@ function InventoryDateFilter() {
   function handleInventoryFormSubmit(values) {
     const { from, to } = values.bookingDates || {};
 
-    if (from) {
-      searchParams.set(
-        SEARCH_PARAMS_KEYS.CHECKIN,
-        dayjs(from).format("YYYY-MM-DD")
-      );
+    if (!from || !to) {
+      toast("Please select both Start date and End date", {
+        type: "error",
+      });
+      return;
     }
-    if (to) {
-      searchParams.set(
-        SEARCH_PARAMS_KEYS.CHECKOUT,
-        dayjs(to).format("YYYY-MM-DD")
-      );
+
+    if (dayjs(to).isBefore(dayjs(from))) {
+      toast("End date cannot be before Start date", {
+        type: "error",
+      });
+      return;
     }
+
+    searchParams.set(
+      SEARCH_PARAMS_KEYS.CHECKIN,
+      dayjs(from).format("YYYY-MM-DD")
+    );
+    searchParams.set(
+      SEARCH_PARAMS_KEYS.CHECKOUT,
+      dayjs(to).format("YYYY-MM-DD")
+    );
     searchParams.set(SEARCH_PARAMS_KEYS.PAGE, 1);
     setSearchParams(searchParams);
   }
